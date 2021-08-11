@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wp.eauto.employee.mapper.EmployeeMapper">
+    <resultMap type="com.wp.eauto.employee.viewmodel.response.LoginResultModel" id="useraccount">
+
+    </resultMap>
+    <select id="getEmployee" resultType="com.wp.eauto.employee.domain.Employee">
+        select id from employee
+    </select>
+    <select id="login" resultType="com.wp.eauto.employee.viewmodel.response.LoginResultModel"
+            parameterType="com.wp.eauto.employee.viewmodel.request.LoginRequestModel">
+        select
+        id,
+        user_name as userName,
+        password,
+        employee_id as employeeId,
+        account_status as accountStatus,
+        is_deleted as isDeleted
+        from user_account
+        where user_name=#{userName}
+    </select>
+</mapper>

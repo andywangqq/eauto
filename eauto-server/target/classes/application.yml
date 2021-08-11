@@ -1,0 +1,25 @@
+server:
+  port: 1111
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  server:
+    enable-self-preservation: false      # 关闭自我保护模式（默认为打开）
+    eviction-interval-timer-in-ms: 600000  # 续期时间，即扫描失效服务的间隔时间 一分钟，本地测试不需这么频繁，调为1小时
+  client:
+    register-with-eureka: false #自己就是注册中心，不用注册自己
+    fetch-registry: false #是否去注册中心获取其他服务的地址
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+spring:
+  cloud:
+  application:
+    name: eauto
+  security:
+    basic:
+      enabled: true
+    user:
+      name: admin
+      password: 123456
+  freemarker:
+    prefer-file-system-access: false
