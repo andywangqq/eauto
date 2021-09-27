@@ -4,11 +4,12 @@ import java.util.Date;
 /**
  * table name:  dealer_product
  * author name: Andy
- * create time: 2021-08-11 21:51:27
+ * create time: 2021-09-27 22:32:06
  */ 
 public class DealerProduct extends EntityHelper{
 
-	private String id;
+	private long id;
+	private String dealer_product_id;
 	/*经销商id*/
 	private String dealer_id;
 	/*产品Id*/
@@ -19,17 +20,24 @@ public class DealerProduct extends EntityHelper{
 	public DealerProduct() {
 		super();
 	}
-	public DealerProduct(String id,String dealer_id,String product_id,byte has_main) {
+	public DealerProduct(long id,String dealer_product_id,String dealer_id,String product_id,byte has_main) {
 		this.id=id;
+		this.dealer_product_id=dealer_product_id;
 		this.dealer_id=dealer_id;
 		this.product_id=product_id;
 		this.has_main=has_main;
 	}
-	public void setId(String id){
+	public void setId(long id){
 		this.id=id;
 	}
-	public String getId(){
+	public long getId(){
 		return id;
+	}
+	public void setDealer_product_id(String dealer_product_id){
+		this.dealer_product_id=dealer_product_id;
+	}
+	public String getDealer_product_id(){
+		return dealer_product_id;
 	}
 	public void setDealer_id(String dealer_id){
 		this.dealer_id=dealer_id;
@@ -53,6 +61,7 @@ public class DealerProduct extends EntityHelper{
 	public String toString() {
 		return "dealer_product[" + 
 			"id=" + id + 
+			", dealer_product_id=" + dealer_product_id + 
 			", dealer_id=" + dealer_id + 
 			", product_id=" + product_id + 
 			", has_main=" + has_main + 

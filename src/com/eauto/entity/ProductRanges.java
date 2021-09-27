@@ -5,11 +5,12 @@ import java.math.BigDecimal;
 /**
  * table name:  product_ranges
  * author name: Andy
- * create time: 2021-08-11 21:51:27
+ * create time: 2021-09-27 22:32:06
  */ 
 public class ProductRanges extends EntityHelper{
 
-	private String id;
+	private long id;
+	private String product_ranges_id;
 	/*产品名称*/
 	private String product_name;
 	/*是否已删除*/
@@ -26,8 +27,9 @@ public class ProductRanges extends EntityHelper{
 	public ProductRanges() {
 		super();
 	}
-	public ProductRanges(String id,String product_name,byte is_deleted,Date create_time,String create_user_id,Date update_time,String update_user_id) {
+	public ProductRanges(long id,String product_ranges_id,String product_name,byte is_deleted,Date create_time,String create_user_id,Date update_time,String update_user_id) {
 		this.id=id;
+		this.product_ranges_id=product_ranges_id;
 		this.product_name=product_name;
 		this.is_deleted=is_deleted;
 		this.create_time=create_time;
@@ -35,11 +37,17 @@ public class ProductRanges extends EntityHelper{
 		this.update_time=update_time;
 		this.update_user_id=update_user_id;
 	}
-	public void setId(String id){
+	public void setId(long id){
 		this.id=id;
 	}
-	public String getId(){
+	public long getId(){
 		return id;
+	}
+	public void setProduct_ranges_id(String product_ranges_id){
+		this.product_ranges_id=product_ranges_id;
+	}
+	public String getProduct_ranges_id(){
+		return product_ranges_id;
 	}
 	public void setProduct_name(String product_name){
 		this.product_name=product_name;
@@ -81,6 +89,7 @@ public class ProductRanges extends EntityHelper{
 	public String toString() {
 		return "product_ranges[" + 
 			"id=" + id + 
+			", product_ranges_id=" + product_ranges_id + 
 			", product_name=" + product_name + 
 			", is_deleted=" + is_deleted + 
 			", create_time=" + create_time + 

@@ -4,11 +4,12 @@ import java.util.Date;
 /**
  * table name:  customer_vehicle
  * author name: Andy
- * create time: 2021-08-11 21:51:27
+ * create time: 2021-09-27 22:32:05
  */ 
 public class CustomerVehicle extends EntityHelper{
 
-	private String id;
+	private long id;
+	private String customer_vehicle_id;
 	/*车牌照*/
 	private String number_plate;
 	/*车主*/
@@ -49,8 +50,9 @@ public class CustomerVehicle extends EntityHelper{
 	public CustomerVehicle() {
 		super();
 	}
-	public CustomerVehicle(String id,String number_plate,String vehicle_owner,String phone,Date purchase_date,String brand_id,String series_id,String type_id,String vin,String engine_number,int years,String vehicle_capacity,String color,int current_mileage,int service_interval,Date create_time,String create_user_id,Date update_time,String update_user_id) {
+	public CustomerVehicle(long id,String customer_vehicle_id,String number_plate,String vehicle_owner,String phone,Date purchase_date,String brand_id,String series_id,String type_id,String vin,String engine_number,int years,String vehicle_capacity,String color,int current_mileage,int service_interval,Date create_time,String create_user_id,Date update_time,String update_user_id) {
 		this.id=id;
+		this.customer_vehicle_id=customer_vehicle_id;
 		this.number_plate=number_plate;
 		this.vehicle_owner=vehicle_owner;
 		this.phone=phone;
@@ -70,11 +72,17 @@ public class CustomerVehicle extends EntityHelper{
 		this.update_time=update_time;
 		this.update_user_id=update_user_id;
 	}
-	public void setId(String id){
+	public void setId(long id){
 		this.id=id;
 	}
-	public String getId(){
+	public long getId(){
 		return id;
+	}
+	public void setCustomer_vehicle_id(String customer_vehicle_id){
+		this.customer_vehicle_id=customer_vehicle_id;
+	}
+	public String getCustomer_vehicle_id(){
+		return customer_vehicle_id;
 	}
 	public void setNumber_plate(String number_plate){
 		this.number_plate=number_plate;
@@ -188,6 +196,7 @@ public class CustomerVehicle extends EntityHelper{
 	public String toString() {
 		return "customer_vehicle[" + 
 			"id=" + id + 
+			", customer_vehicle_id=" + customer_vehicle_id + 
 			", number_plate=" + number_plate + 
 			", vehicle_owner=" + vehicle_owner + 
 			", phone=" + phone + 

@@ -5,11 +5,12 @@ import java.math.BigDecimal;
 /**
  * table name:  employee
  * author name: Andy
- * create time: 2021-08-11 21:51:27
+ * create time: 2021-09-27 22:32:06
  */ 
 public class Employee extends EntityHelper{
 
-	private String id;
+	private long id;
+	private String employee_id;
 	/*雇员名称*/
 	private String employee_name;
 	/*性别*/
@@ -47,8 +48,9 @@ public class Employee extends EntityHelper{
 	public Employee() {
 		super();
 	}
-	public Employee(String id,String employee_name,byte gender,String phone,String department_id,BigDecimal allowance,BigDecimal base_pay,String qq,String id_card_no,String email,byte employee_status,Date hiredate,String dealer_id,byte is_deleted,Date create_time,String create_user_id,Date update_time,String update_user_id) {
+	public Employee(long id,String employee_id,String employee_name,byte gender,String phone,String department_id,BigDecimal allowance,BigDecimal base_pay,String qq,String id_card_no,String email,byte employee_status,Date hiredate,String dealer_id,byte is_deleted,Date create_time,String create_user_id,Date update_time,String update_user_id) {
 		this.id=id;
+		this.employee_id=employee_id;
 		this.employee_name=employee_name;
 		this.gender=gender;
 		this.phone=phone;
@@ -67,11 +69,17 @@ public class Employee extends EntityHelper{
 		this.update_time=update_time;
 		this.update_user_id=update_user_id;
 	}
-	public void setId(String id){
+	public void setId(long id){
 		this.id=id;
 	}
-	public String getId(){
+	public long getId(){
 		return id;
+	}
+	public void setEmployee_id(String employee_id){
+		this.employee_id=employee_id;
+	}
+	public String getEmployee_id(){
+		return employee_id;
 	}
 	public void setEmployee_name(String employee_name){
 		this.employee_name=employee_name;
@@ -179,6 +187,7 @@ public class Employee extends EntityHelper{
 	public String toString() {
 		return "employee[" + 
 			"id=" + id + 
+			", employee_id=" + employee_id + 
 			", employee_name=" + employee_name + 
 			", gender=" + gender + 
 			", phone=" + phone + 

@@ -5,11 +5,12 @@ import java.math.BigDecimal;
 /**
  * table name:  role
  * author name: Andy
- * create time: 2021-08-11 21:51:27
+ * create time: 2021-09-27 22:32:06
  */ 
 public class Role extends EntityHelper{
 
-	private String id;
+	private long id;
+	private String role_id;
 	/*角色名称*/
 	private String role_name;
 	/*备注*/
@@ -30,8 +31,9 @@ public class Role extends EntityHelper{
 	public Role() {
 		super();
 	}
-	public Role(String id,String role_name,String remark,String dealer_id,byte is_deleted,Date create_time,String create_user_id,Date update_time,String update_user_id) {
+	public Role(long id,String role_id,String role_name,String remark,String dealer_id,byte is_deleted,Date create_time,String create_user_id,Date update_time,String update_user_id) {
 		this.id=id;
+		this.role_id=role_id;
 		this.role_name=role_name;
 		this.remark=remark;
 		this.dealer_id=dealer_id;
@@ -41,11 +43,17 @@ public class Role extends EntityHelper{
 		this.update_time=update_time;
 		this.update_user_id=update_user_id;
 	}
-	public void setId(String id){
+	public void setId(long id){
 		this.id=id;
 	}
-	public String getId(){
+	public long getId(){
 		return id;
+	}
+	public void setRole_id(String role_id){
+		this.role_id=role_id;
+	}
+	public String getRole_id(){
+		return role_id;
 	}
 	public void setRole_name(String role_name){
 		this.role_name=role_name;
@@ -99,6 +107,7 @@ public class Role extends EntityHelper{
 	public String toString() {
 		return "role[" + 
 			"id=" + id + 
+			", role_id=" + role_id + 
 			", role_name=" + role_name + 
 			", remark=" + remark + 
 			", dealer_id=" + dealer_id + 

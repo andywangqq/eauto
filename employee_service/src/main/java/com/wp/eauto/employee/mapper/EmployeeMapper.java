@@ -1,20 +1,40 @@
 package com.wp.eauto.employee.mapper;
 
-import com.wp.eauto.employee.domain.Employee;
-import com.wp.eauto.employee.viewmodel.request.LoginRequestModel;
-import com.wp.eauto.employee.viewmodel.response.LoginResultModel;
+import com.wp.eauto.employee.domain.UserAccount;
+import com.wp.eauto.employee.viewmodel.model.LoginEmployeeModel;
+import com.wp.eauto.employee.viewmodel.model.LoginEmployeeRoleModel;
+import com.wp.eauto.employee.viewmodel.model.LoginUserAccountModel;
+import com.wp.eauto.employee.viewmodel.request.employee.login.LoginEmployeeRequestModel;
+import com.wp.eauto.employee.viewmodel.response.employee.login.EmployeeAndDealer;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public interface EmployeeMapper {
-    List<Employee> getEmployee();
     /**
-     * 登录
-     * @param param
+     * 获取用户账户
+     *
+     * @param userName
      * @return
      */
-    List<LoginResultModel> login(LoginRequestModel param);
+    LoginUserAccountModel getUserAccount(@Param("userName") String userName);
+
+    /**
+     * 查询人员信息
+     *
+     * @param employeeId
+     * @return
+     */
+    LoginEmployeeModel getEmployeeById(@Param("employeeId") String employeeId);
+
+    /**
+     * 查询人员角色
+     *
+     * @param employeeId
+     * @return
+     */
+    List<LoginEmployeeRoleModel> getEmployeeRoles(@Param("employeeId") String employeeId);
 
 }

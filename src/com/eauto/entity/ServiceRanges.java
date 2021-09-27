@@ -5,11 +5,12 @@ import java.math.BigDecimal;
 /**
  * table name:  service_ranges
  * author name: Andy
- * create time: 2021-08-11 21:51:27
+ * create time: 2021-09-27 22:32:06
  */ 
 public class ServiceRanges extends EntityHelper{
 
-	private String id;
+	private long id;
+	private String service_ranges_id;
 	/*服务名称*/
 	private String service_name;
 	/*是否已删除*/
@@ -26,8 +27,9 @@ public class ServiceRanges extends EntityHelper{
 	public ServiceRanges() {
 		super();
 	}
-	public ServiceRanges(String id,String service_name,byte is_deleted,Date create_time,String create_user_id,Date update_time,String update_user_id) {
+	public ServiceRanges(long id,String service_ranges_id,String service_name,byte is_deleted,Date create_time,String create_user_id,Date update_time,String update_user_id) {
 		this.id=id;
+		this.service_ranges_id=service_ranges_id;
 		this.service_name=service_name;
 		this.is_deleted=is_deleted;
 		this.create_time=create_time;
@@ -35,11 +37,17 @@ public class ServiceRanges extends EntityHelper{
 		this.update_time=update_time;
 		this.update_user_id=update_user_id;
 	}
-	public void setId(String id){
+	public void setId(long id){
 		this.id=id;
 	}
-	public String getId(){
+	public long getId(){
 		return id;
+	}
+	public void setService_ranges_id(String service_ranges_id){
+		this.service_ranges_id=service_ranges_id;
+	}
+	public String getService_ranges_id(){
+		return service_ranges_id;
 	}
 	public void setService_name(String service_name){
 		this.service_name=service_name;
@@ -81,6 +89,7 @@ public class ServiceRanges extends EntityHelper{
 	public String toString() {
 		return "service_ranges[" + 
 			"id=" + id + 
+			", service_ranges_id=" + service_ranges_id + 
 			", service_name=" + service_name + 
 			", is_deleted=" + is_deleted + 
 			", create_time=" + create_time + 

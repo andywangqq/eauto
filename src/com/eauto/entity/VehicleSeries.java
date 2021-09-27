@@ -5,11 +5,12 @@ import java.math.BigDecimal;
 /**
  * table name:  vehicle_series
  * author name: Andy
- * create time: 2021-08-11 21:51:28
+ * create time: 2021-09-27 22:32:06
  */ 
 public class VehicleSeries extends EntityHelper{
 
-	private String id;
+	private long id;
+	private String vehicle_series_id;
 	/*车系名称*/
 	private String series_name;
 	/*品牌id*/
@@ -18,16 +19,23 @@ public class VehicleSeries extends EntityHelper{
 	public VehicleSeries() {
 		super();
 	}
-	public VehicleSeries(String id,String series_name,String vehicle_brand_id) {
+	public VehicleSeries(long id,String vehicle_series_id,String series_name,String vehicle_brand_id) {
 		this.id=id;
+		this.vehicle_series_id=vehicle_series_id;
 		this.series_name=series_name;
 		this.vehicle_brand_id=vehicle_brand_id;
 	}
-	public void setId(String id){
+	public void setId(long id){
 		this.id=id;
 	}
-	public String getId(){
+	public long getId(){
 		return id;
+	}
+	public void setVehicle_series_id(String vehicle_series_id){
+		this.vehicle_series_id=vehicle_series_id;
+	}
+	public String getVehicle_series_id(){
+		return vehicle_series_id;
 	}
 	public void setSeries_name(String series_name){
 		this.series_name=series_name;
@@ -45,6 +53,7 @@ public class VehicleSeries extends EntityHelper{
 	public String toString() {
 		return "vehicle_series[" + 
 			"id=" + id + 
+			", vehicle_series_id=" + vehicle_series_id + 
 			", series_name=" + series_name + 
 			", vehicle_brand_id=" + vehicle_brand_id + 
 			"]";

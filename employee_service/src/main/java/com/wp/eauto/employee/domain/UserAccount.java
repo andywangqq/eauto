@@ -4,19 +4,22 @@ import java.util.Date;
 import java.math.BigDecimal;
 /**
  * table name:  user_account
- * author name: 呐喊
- * create time: 2021-06-09 22:59:08
+ * author name: Andy
+ * create time: 2021-09-27 22:32:06
  */ 
 public class UserAccount extends EntityHelper{
 
-	private String id;
+	private long id;
+	private String user_account_id;
 	/*用户名*/
 	private String user_name;
 	/*密码*/
 	private String password;
 	/*人员id*/
 	private String employee_id;
-	/*账号状态*/
+	/*账号状态
+            1:正常
+            2:停用*/
 	private byte account_status;
 	/*是否已删除*/
 	private byte is_deleted;
@@ -24,19 +27,26 @@ public class UserAccount extends EntityHelper{
 	public UserAccount() {
 		super();
 	}
-	public UserAccount(String id,String user_name,String password,String employee_id,byte account_status,byte is_deleted) {
+	public UserAccount(long id,String user_account_id,String user_name,String password,String employee_id,byte account_status,byte is_deleted) {
 		this.id=id;
+		this.user_account_id=user_account_id;
 		this.user_name=user_name;
 		this.password=password;
 		this.employee_id=employee_id;
 		this.account_status=account_status;
 		this.is_deleted=is_deleted;
 	}
-	public void setId(String id){
+	public void setId(long id){
 		this.id=id;
 	}
-	public String getId(){
+	public long getId(){
 		return id;
+	}
+	public void setUser_account_id(String user_account_id){
+		this.user_account_id=user_account_id;
+	}
+	public String getUser_account_id(){
+		return user_account_id;
 	}
 	public void setUser_name(String user_name){
 		this.user_name=user_name;
@@ -72,6 +82,7 @@ public class UserAccount extends EntityHelper{
 	public String toString() {
 		return "user_account[" + 
 			"id=" + id + 
+			", user_account_id=" + user_account_id + 
 			", user_name=" + user_name + 
 			", password=" + password + 
 			", employee_id=" + employee_id + 

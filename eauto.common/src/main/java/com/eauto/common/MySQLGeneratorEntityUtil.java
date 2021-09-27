@@ -39,7 +39,7 @@ public class MySQLGeneratorEntityUtil {
     // 数据库配置信息
     private static final String URL = "jdbc:mysql://localhost:3306/eauto?serverTimezone=UTC";
     private static final String NAME = "root";
-    private static final String PASS = "root@3306";
+    private static final String PASS = "root";
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";//"com.mysql.jdbc.Driver";
 
     //指定实体生成所在包的路径

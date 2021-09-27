@@ -4,11 +4,12 @@ import java.util.Date;
 /**
  * table name:  customer
  * author name: Andy
- * create time: 2021-08-11 21:51:27
+ * create time: 2021-09-27 22:32:05
  */ 
 public class Customer extends EntityHelper{
 
-	private String id;
+	private long id;
+	private String customer_id;
 	/*用户名称*/
 	private String cn_name;
 	/*简称*/
@@ -24,7 +25,7 @@ public class Customer extends EntityHelper{
 	/*qq*/
 	private String qq;
 	/*生日*/
-	private Date birthday;
+	private null birthday;
 	/*客户类型*/
 	private String customer_type;
 	/*固定电话*/
@@ -41,8 +42,9 @@ public class Customer extends EntityHelper{
 	public Customer() {
 		super();
 	}
-	public Customer(String id,String cn_name,String short_name,String en_name,String phone,String address,String email,String qq,Date birthday,String customer_type,String telephone,Date create_time,String create_user_id,Date update_time,String update_user_id) {
+	public Customer(long id,String customer_id,String cn_name,String short_name,String en_name,String phone,String address,String email,String qq,null birthday,String customer_type,String telephone,Date create_time,String create_user_id,Date update_time,String update_user_id) {
 		this.id=id;
+		this.customer_id=customer_id;
 		this.cn_name=cn_name;
 		this.short_name=short_name;
 		this.en_name=en_name;
@@ -58,11 +60,17 @@ public class Customer extends EntityHelper{
 		this.update_time=update_time;
 		this.update_user_id=update_user_id;
 	}
-	public void setId(String id){
+	public void setId(long id){
 		this.id=id;
 	}
-	public String getId(){
+	public long getId(){
 		return id;
+	}
+	public void setCustomer_id(String customer_id){
+		this.customer_id=customer_id;
+	}
+	public String getCustomer_id(){
+		return customer_id;
 	}
 	public void setCn_name(String cn_name){
 		this.cn_name=cn_name;
@@ -106,10 +114,10 @@ public class Customer extends EntityHelper{
 	public String getQq(){
 		return qq;
 	}
-	public void setBirthday(Date birthday){
+	public void setBirthday(null birthday){
 		this.birthday=birthday;
 	}
-	public Date getBirthday(){
+	public null getBirthday(){
 		return birthday;
 	}
 	public void setCustomer_type(String customer_type){
@@ -152,6 +160,7 @@ public class Customer extends EntityHelper{
 	public String toString() {
 		return "customer[" + 
 			"id=" + id + 
+			", customer_id=" + customer_id + 
 			", cn_name=" + cn_name + 
 			", short_name=" + short_name + 
 			", en_name=" + en_name + 

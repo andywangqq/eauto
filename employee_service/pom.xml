@@ -29,7 +29,7 @@
         </dependency>
         <dependency>
             <groupId>org.eauto</groupId>
-            <artifactId>eauto.common</artifactId>
+            <artifactId>eauto-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

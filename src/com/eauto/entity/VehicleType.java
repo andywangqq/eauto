@@ -5,11 +5,12 @@ import java.math.BigDecimal;
 /**
  * table name:  vehicle_type
  * author name: Andy
- * create time: 2021-08-11 21:51:28
+ * create time: 2021-09-27 22:32:06
  */ 
 public class VehicleType extends EntityHelper{
 
-	private String id;
+	private long id;
+	private String vehicle_type_id;
 	/*车型名称*/
 	private String type_name;
 	/*车系id*/
@@ -20,17 +21,24 @@ public class VehicleType extends EntityHelper{
 	public VehicleType() {
 		super();
 	}
-	public VehicleType(String id,String type_name,String vehicle_series_id,String vehicle_brand_id) {
+	public VehicleType(long id,String vehicle_type_id,String type_name,String vehicle_series_id,String vehicle_brand_id) {
 		this.id=id;
+		this.vehicle_type_id=vehicle_type_id;
 		this.type_name=type_name;
 		this.vehicle_series_id=vehicle_series_id;
 		this.vehicle_brand_id=vehicle_brand_id;
 	}
-	public void setId(String id){
+	public void setId(long id){
 		this.id=id;
 	}
-	public String getId(){
+	public long getId(){
 		return id;
+	}
+	public void setVehicle_type_id(String vehicle_type_id){
+		this.vehicle_type_id=vehicle_type_id;
+	}
+	public String getVehicle_type_id(){
+		return vehicle_type_id;
 	}
 	public void setType_name(String type_name){
 		this.type_name=type_name;
@@ -54,6 +62,7 @@ public class VehicleType extends EntityHelper{
 	public String toString() {
 		return "vehicle_type[" + 
 			"id=" + id + 
+			", vehicle_type_id=" + vehicle_type_id + 
 			", type_name=" + type_name + 
 			", vehicle_series_id=" + vehicle_series_id + 
 			", vehicle_brand_id=" + vehicle_brand_id + 

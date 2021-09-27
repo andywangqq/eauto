@@ -3,12 +3,13 @@ package com.wp.eauto.employee.domain;
 import java.util.Date;
 /**
  * table name:  dealer
- * author name: 呐喊
- * create time: 2021-06-09 22:59:08
+ * author name: Andy
+ * create time: 2021-09-27 22:32:06
  */ 
 public class Dealer extends EntityHelper{
 
-	private String id;
+	private long id;
+	private String dealer_id;
 	/*中文名称*/
 	private String cn_name;
 	/*英文名称*/
@@ -49,8 +50,9 @@ public class Dealer extends EntityHelper{
 	public Dealer() {
 		super();
 	}
-	public Dealer(String id,String cn_name,String en_name,String a_name,String website,String address,Date registration_time,String plate_number,String telephone,byte dealer_type,String main_product,String main_vehicle,String authentication,String remark,byte is_deleted,String create_user_id,Date create_time,String update_user_id,Date update_time) {
+	public Dealer(long id,String dealer_id,String cn_name,String en_name,String a_name,String website,String address,Date registration_time,String plate_number,String telephone,byte dealer_type,String main_product,String main_vehicle,String authentication,String remark,byte is_deleted,String create_user_id,Date create_time,String update_user_id,Date update_time) {
 		this.id=id;
+		this.dealer_id=dealer_id;
 		this.cn_name=cn_name;
 		this.en_name=en_name;
 		this.a_name=a_name;
@@ -70,11 +72,17 @@ public class Dealer extends EntityHelper{
 		this.update_user_id=update_user_id;
 		this.update_time=update_time;
 	}
-	public void setId(String id){
+	public void setId(long id){
 		this.id=id;
 	}
-	public String getId(){
+	public long getId(){
 		return id;
+	}
+	public void setDealer_id(String dealer_id){
+		this.dealer_id=dealer_id;
+	}
+	public String getDealer_id(){
+		return dealer_id;
 	}
 	public void setCn_name(String cn_name){
 		this.cn_name=cn_name;
@@ -188,6 +196,7 @@ public class Dealer extends EntityHelper{
 	public String toString() {
 		return "dealer[" + 
 			"id=" + id + 
+			", dealer_id=" + dealer_id + 
 			", cn_name=" + cn_name + 
 			", en_name=" + en_name + 
 			", a_name=" + a_name + 

@@ -4,11 +4,12 @@ import java.util.Date;
 /**
  * table name:  dealer_contact
  * author name: Andy
- * create time: 2021-08-11 21:51:27
+ * create time: 2021-09-27 22:32:06
  */ 
 public class DealerContact extends EntityHelper{
 
-	private String id;
+	private long id;
+	private String dealer_contact_id;
 	/*经销商id*/
 	private String dealer_id;
 	/*联系人名称*/
@@ -22,19 +23,26 @@ public class DealerContact extends EntityHelper{
 	public DealerContact() {
 		super();
 	}
-	public DealerContact(String id,String dealer_id,String contact_name,String phone,String email,String qq) {
+	public DealerContact(long id,String dealer_contact_id,String dealer_id,String contact_name,String phone,String email,String qq) {
 		this.id=id;
+		this.dealer_contact_id=dealer_contact_id;
 		this.dealer_id=dealer_id;
 		this.contact_name=contact_name;
 		this.phone=phone;
 		this.email=email;
 		this.qq=qq;
 	}
-	public void setId(String id){
+	public void setId(long id){
 		this.id=id;
 	}
-	public String getId(){
+	public long getId(){
 		return id;
+	}
+	public void setDealer_contact_id(String dealer_contact_id){
+		this.dealer_contact_id=dealer_contact_id;
+	}
+	public String getDealer_contact_id(){
+		return dealer_contact_id;
 	}
 	public void setDealer_id(String dealer_id){
 		this.dealer_id=dealer_id;
@@ -70,6 +78,7 @@ public class DealerContact extends EntityHelper{
 	public String toString() {
 		return "dealer_contact[" + 
 			"id=" + id + 
+			", dealer_contact_id=" + dealer_contact_id + 
 			", dealer_id=" + dealer_id + 
 			", contact_name=" + contact_name + 
 			", phone=" + phone + 

@@ -4,12 +4,13 @@ import java.util.Date;
 import java.math.BigDecimal;
 /**
  * table name:  employee_role
- * author name: 呐喊
- * create time: 2021-06-09 22:59:08
+ * author name: Andy
+ * create time: 2021-09-27 22:32:06
  */ 
 public class EmployeeRole extends EntityHelper{
 
-	private String id;
+	private long id;
+	private String employee_role_id;
 	/*角色id*/
 	private String role_id;
 	/*人员id*/
@@ -18,16 +19,23 @@ public class EmployeeRole extends EntityHelper{
 	public EmployeeRole() {
 		super();
 	}
-	public EmployeeRole(String id,String role_id,String employee_id) {
+	public EmployeeRole(long id,String employee_role_id,String role_id,String employee_id) {
 		this.id=id;
+		this.employee_role_id=employee_role_id;
 		this.role_id=role_id;
 		this.employee_id=employee_id;
 	}
-	public void setId(String id){
+	public void setId(long id){
 		this.id=id;
 	}
-	public String getId(){
+	public long getId(){
 		return id;
+	}
+	public void setEmployee_role_id(String employee_role_id){
+		this.employee_role_id=employee_role_id;
+	}
+	public String getEmployee_role_id(){
+		return employee_role_id;
 	}
 	public void setRole_id(String role_id){
 		this.role_id=role_id;
@@ -45,6 +53,7 @@ public class EmployeeRole extends EntityHelper{
 	public String toString() {
 		return "employee_role[" + 
 			"id=" + id + 
+			", employee_role_id=" + employee_role_id + 
 			", role_id=" + role_id + 
 			", employee_id=" + employee_id + 
 			"]";

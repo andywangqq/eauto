@@ -4,11 +4,12 @@ import java.util.Date;
 /**
  * table name:  dealer_image
  * author name: Andy
- * create time: 2021-08-11 21:51:27
+ * create time: 2021-09-27 22:32:06
  */ 
 public class DealerImage extends EntityHelper{
 
-	private String id;
+	private long id;
+	private String dealer_image_id;
 	/*经销商id*/
 	private String dealer_id;
 	/*图片后缀*/
@@ -33,8 +34,9 @@ public class DealerImage extends EntityHelper{
 	public DealerImage() {
 		super();
 	}
-	public DealerImage(String id,String dealer_id,String image_suffix,String image_type,String image_url,int sort,byte is_deleted,String create_user_id,Date create_time,String update_user_id,Date update_time) {
+	public DealerImage(long id,String dealer_image_id,String dealer_id,String image_suffix,String image_type,String image_url,int sort,byte is_deleted,String create_user_id,Date create_time,String update_user_id,Date update_time) {
 		this.id=id;
+		this.dealer_image_id=dealer_image_id;
 		this.dealer_id=dealer_id;
 		this.image_suffix=image_suffix;
 		this.image_type=image_type;
@@ -46,11 +48,17 @@ public class DealerImage extends EntityHelper{
 		this.update_user_id=update_user_id;
 		this.update_time=update_time;
 	}
-	public void setId(String id){
+	public void setId(long id){
 		this.id=id;
 	}
-	public String getId(){
+	public long getId(){
 		return id;
+	}
+	public void setDealer_image_id(String dealer_image_id){
+		this.dealer_image_id=dealer_image_id;
+	}
+	public String getDealer_image_id(){
+		return dealer_image_id;
 	}
 	public void setDealer_id(String dealer_id){
 		this.dealer_id=dealer_id;
@@ -116,6 +124,7 @@ public class DealerImage extends EntityHelper{
 	public String toString() {
 		return "dealer_image[" + 
 			"id=" + id + 
+			", dealer_image_id=" + dealer_image_id + 
 			", dealer_id=" + dealer_id + 
 			", image_suffix=" + image_suffix + 
 			", image_type=" + image_type + 

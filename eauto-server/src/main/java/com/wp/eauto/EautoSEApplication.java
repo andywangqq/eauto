@@ -7,8 +7,8 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 @EnableEurekaServer
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-public class EautoApplication {
+public class EautoSEApplication {
     public static void main(String[] args) {
-        SpringApplication.run(EautoApplication.class, args);
+        SpringApplication.run(EautoSEApplication.class, args);
     }
 }

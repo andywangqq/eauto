@@ -4,4 +4,5 @@
  * Time: 23:19
  */
 public class EautoAdminApplication {
+
 }
