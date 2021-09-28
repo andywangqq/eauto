@@ -10,11 +10,12 @@
         <module name="eauto-common" />
         <module name="eauto-server" />
         <module name="eauto-admin" />
-        <module name="employee-service" />
+        <module name="system-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
       <module name="eauto-tool" target="1.5" />
+      <module name="employee-service" target="6" />
       <module name="pam-server" target="1.8" />
     </bytecodeTargetLevel>
   </component>

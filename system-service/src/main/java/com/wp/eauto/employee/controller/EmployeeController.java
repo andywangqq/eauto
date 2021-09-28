@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-//import static com.wp.eauto.base.ResultModel.Success;
-
 @RestController
 @RequestMapping("/eauto/employee")
 public class EmployeeController {

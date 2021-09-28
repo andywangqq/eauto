@@ -8,8 +8,8 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @MapperScan(basePackages = {"com.wp.eauto.*.mapper"})
 @EnableEurekaClient
 @SpringBootApplication
-public class EmployeeApplication {
+public class SystemApplication {
     public static void main(String[] args) {
-        SpringApplication.run(EmployeeApplication.class);
+        SpringApplication.run(SystemApplication.class);
     }
 }

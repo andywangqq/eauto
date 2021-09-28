@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wp.eauto.employee.mapper.ActionMapper">
+
+    <!--    查询活动项-->
+    <select id="getActionList" resultType="com.wp.eauto.employee.viewmodel.response.action.ActionResponseModel"
+            parameterType="com.wp.eauto.employee.viewmodel.request.action.ActionRequestModel">
+		select
+		action_name as actionName,
+		action_rul as actionUrl
+        from action_ranges_display d
+        inner join action_ranges r on d.action_ranges_id = r.action_ranges_id
+        where d.dealer_id = #{dealerId}
+        and d.display_position = #{displayPosition}
+        order by r.sort asc
+	</select>
+
+</mapper>
