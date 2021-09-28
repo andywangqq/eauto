@@ -8,9 +8,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="eauto-common" />
-        <module name="eauto-admin" />
-        <module name="employee_service" />
         <module name="eauto-server" />
+        <module name="eauto-admin" />
+        <module name="employee-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">

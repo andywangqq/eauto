@@ -10,7 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>eauto-server</module>
-        <module>employee_service</module>
+        <module>employee-service</module>
         <module>eauto-common</module>
         <module>eauto-admin</module>
     </modules>
