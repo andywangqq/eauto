@@ -1,11 +1,8 @@
 package com.wp.eauto.employee.service.impl;
 
-import com.wp.eauto.employee.domain.UserAccount;
 import com.wp.eauto.employee.viewmodel.model.LoginEmployeeModel;
 import com.wp.eauto.employee.viewmodel.model.LoginEmployeeRoleModel;
 import com.wp.eauto.employee.viewmodel.model.LoginUserAccountModel;
-import com.wp.eauto.employee.viewmodel.request.employee.login.LoginEmployeeRequestModel;
-import com.wp.eauto.employee.viewmodel.response.employee.login.EmployeeAndDealer;
 import com.wp.eauto.employee.mapper.EmployeeMapper;
 import com.wp.eauto.employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;

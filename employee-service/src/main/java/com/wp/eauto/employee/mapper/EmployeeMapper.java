@@ -1,11 +1,8 @@
 package com.wp.eauto.employee.mapper;
 
-import com.wp.eauto.employee.domain.UserAccount;
 import com.wp.eauto.employee.viewmodel.model.LoginEmployeeModel;
 import com.wp.eauto.employee.viewmodel.model.LoginEmployeeRoleModel;
 import com.wp.eauto.employee.viewmodel.model.LoginUserAccountModel;
-import com.wp.eauto.employee.viewmodel.request.employee.login.LoginEmployeeRequestModel;
-import com.wp.eauto.employee.viewmodel.response.employee.login.EmployeeAndDealer;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

@@ -1,12 +1,8 @@
 package com.wp.eauto.employee.service;
 
-import com.wp.eauto.employee.domain.Employee;
-import com.wp.eauto.employee.domain.UserAccount;
 import com.wp.eauto.employee.viewmodel.model.LoginEmployeeModel;
 import com.wp.eauto.employee.viewmodel.model.LoginEmployeeRoleModel;
 import com.wp.eauto.employee.viewmodel.model.LoginUserAccountModel;
-import com.wp.eauto.employee.viewmodel.request.employee.login.LoginEmployeeRequestModel;
-import com.wp.eauto.employee.viewmodel.response.employee.login.EmployeeAndDealer;
 
 import java.util.List;
 

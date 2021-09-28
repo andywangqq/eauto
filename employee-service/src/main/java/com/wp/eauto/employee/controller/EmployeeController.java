@@ -2,14 +2,12 @@ package com.wp.eauto.employee.controller;
 
 import com.eauto.base.ResultCode;
 import com.eauto.base.ResultModel;
-import com.wp.eauto.employee.domain.Employee;
-import com.wp.eauto.employee.domain.UserAccount;
 import com.wp.eauto.employee.service.EmployeeService;
 import com.wp.eauto.employee.viewmodel.model.LoginEmployeeModel;
 import com.wp.eauto.employee.viewmodel.model.LoginEmployeeRoleModel;
 import com.wp.eauto.employee.viewmodel.model.LoginUserAccountModel;
-import com.wp.eauto.employee.viewmodel.request.employee.login.LoginEmployeeRequestModel;
-import com.wp.eauto.employee.viewmodel.response.employee.login.LoginEmployeeResponseModel;
+import com.wp.eauto.employee.viewmodel.request.login.LoginEmployeeRequestModel;
+import com.wp.eauto.employee.viewmodel.response.login.LoginEmployeeResponseModel;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import javax.xml.transform.Result;
 import java.util.List;
 
 //import static com.wp.eauto.base.ResultModel.Success;

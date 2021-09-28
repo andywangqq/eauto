@@ -1,4 +1,4 @@
-package com.wp.eauto.employee.viewmodel.response.employee.login;
+package com.wp.eauto.employee.viewmodel.response.login;
 
 import lombok.Data;
 /**
