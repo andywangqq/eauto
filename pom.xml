@@ -11,7 +11,7 @@
     <modules>
         <module>eauto-server</module>
         <module>employee_service</module>
-        <module>eauto.common</module>
+        <module>eauto-common</module>
         <module>eauto-admin</module>
     </modules>
 

@@ -7,13 +7,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="eauto.common" />
+        <module name="eauto-common" />
         <module name="eauto-admin" />
         <module name="employee_service" />
         <module name="eauto-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
+      <module name="eauto-tool" target="1.5" />
       <module name="pam-server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
