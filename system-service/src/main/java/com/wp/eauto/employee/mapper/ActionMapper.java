@@ -7,6 +7,8 @@ package com.wp.eauto.employee.mapper;
  * Description: No Description
  */
 
+import com.eauto.mapper.BaseMapper;
+import com.wp.eauto.employee.domain.Dealer;
 import com.wp.eauto.employee.viewmodel.request.action.ActionRequestModel;
 import com.wp.eauto.employee.viewmodel.response.action.ActionResponseModel;
 import org.springframework.stereotype.Repository;
