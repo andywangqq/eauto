@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class AutoGenerate {
     private static String dbname = "eauto";
-    private static String modelname = "employee";
+    private static String modelname = "system";
 
 //    数据库配置
     private static String url = "jdbc:mysql://127.0.0.1:3306/eauto?characterEncoding=utf-8&serverTimezone=Asia/Shanghai";
@@ -40,27 +40,40 @@ public class AutoGenerate {
 
         AutoGenerate ag = new AutoGenerate();
         List<String> tableList = ag.getAllTableList();
-        for (String tableName : tableList) {
-            //生成实体
-            GenerateEntity ge  = new GenerateEntity(ag.dbMetaData,dbname,modelname,path+"entity\\");
-            ge.getTableColumns(tableName);
+        //生成实体
+        GenerateEntity ge  = new GenerateEntity(ag.dbMetaData,dbname,modelname,path+"entity\\");
+        //清空文件夹下所有文件
+        ge.delAllFile(path+"entity");
 
-            //生成mapperxml
-            GenerateMapperXml gm  = new GenerateMapperXml(ag.dbMetaData,dbname,modelname,path+"mapperxml\\");
-            gm.getTableColumns(tableName);
+        //生成mapperxml
+        GenerateMapperXml gmxml  = new GenerateMapperXml(ag.dbMetaData,dbname,modelname,path+"mapperxml\\");
+        //清空文件夹下所有文件
+        gmxml.delAllFile(path+"mapperxml");
+
+        for (String tableName : tableList) {
+            //生成实体对象
+            ge.getTableColumns(tableName);
+            //生成mapperxml对象
+            gmxml.getTableColumns(tableName);
 
         }
 
-        //生成mapper
+        //生成mapper对象
         GenerateMapper gm = new GenerateMapper(tableList,dbname, modelname,path+"mapper\\");
+        //清空文件夹下所有文件
+        gm.delAllFile(path+"mapper");
         gm.getService();
 
-        //生成service
+        //生成service对象
         GenerateService gs = new GenerateService(tableList,dbname, modelname,path+"service\\");
+        //清空文件夹下所有文件
+        gs.delAllFile(path+"service");
         gs.getService();
 
-        //生成serviceimpl
+        //生成serviceimpl对象
         GenerateServiceImpl gsi = new GenerateServiceImpl(tableList,dbname, modelname,ag.path+"serviceimpl\\");
+        //清空文件夹下所有文件
+        gsi.delAllFile(path+"serviceimpl");
         gsi.getService();
 //      aa.getTableColumns("REPORT_REQ");
     }

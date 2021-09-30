@@ -6,10 +6,8 @@ package com.eauto.security.generateentity;
  * Time:11:46
  * Description: No Description
  */
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+
+import java.io.*;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -20,23 +18,25 @@ import java.text.SimpleDateFormat;
 public class GenerateMapperXml {
 
     private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private String dbname="";
+    private String dbname = "";
     private DatabaseMetaData dbMetaData = null;
     private String packageNameMybatisDao = "";
+    private String packageNamedomain = "";
     private String path = "";
 
     public GenerateMapperXml(DatabaseMetaData dbMetaData, String dbname, String modelname, String path) {
         this.dbMetaData = dbMetaData;
         this.dbname = dbname;
-        packageNameMybatisDao = "com.wp.eauto."+modelname+".mapper";
+        packageNameMybatisDao = "com.wp.eauto." + modelname + ".mapper";
+        packageNamedomain = "com.wp.eauto." + modelname + ".domain";
         this.path = path;
     }
 
     /**
+     * @param tableName
      * @Description: 获取表对应的所有列
      * @author: ppt
      * @date: 2015-3-16 上午10:13:17
-     * @param tableName
      * @return: void
      */
     public void getTableColumns(String tableName) {
@@ -50,12 +50,12 @@ public class GenerateMapperXml {
                     "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
             header.append("<!DOCTYPE mapper PUBLIC \"-//mybatis.org//DTD Mapper 3.0//EN\" \"http://mybatis.org/dtd/mybatis-3-mapper.dtd\">\n");
             header.append("<mapper namespace=\"");
-            header.append(packageNameMybatisDao+"."+thisFileName);
+            header.append(packageNameMybatisDao + "." + thisFileName);
             header.append("\">\n\n");
             StringBuffer footer = new StringBuffer("\n</mapper>");
             StringBuffer add = new StringBuffer();
             //增加数据
-            add.append("\t<insert id=\"addEntity\" parameterType=\""+className+"\">\n");
+            add.append("\t<insert id=\"addEntity\" parameterType=\"" + packageNamedomain + "." + className + "\">\n");
             String insert = "\t\tinsert into " + tableName + "(";
             String column = "";
             String values = "";
@@ -67,44 +67,44 @@ public class GenerateMapperXml {
             //更新数据
             StringBuffer update = new StringBuffer();
             String updateConent = "";
-            update.append("\t<update id=\"updateEntity\" parameterType=\""+className+"\">\n");
+            update.append("\t<update id=\"updateEntity\" parameterType=\"" + packageNamedomain + "." + className + "\">\n");
             update.append("\t\tupdate " + tableName + " set ");
             //查找数据
             StringBuffer select = new StringBuffer();
-            select.append("\t<select id=\"findEntity\" parameterType=\""+className+"\" resultType=\""+className+"\">\n");
+            select.append("\t<select id=\"findEntity\" parameterType=\"" + packageNamedomain + "." + className + "\" resultType=\"" + packageNamedomain + "." + className + "\">\n");
             String selectContent = "\t\tselect\n";
             //查找数据list
             StringBuffer selectList = new StringBuffer();
-            selectList.append("\t<select id=\"findEntityList\" parameterType=\""+className+"\" resultType=\""+className+"\">\n");
+            selectList.append("\t<select id=\"findEntityList\" parameterType=\"" + packageNamedomain + "." + className + "\" resultType=\"" + packageNamedomain + "." + className + "\">\n");
             while (resultSetColumn.next()) {
                 String columnName = resultSetColumn.getString("COLUMN_NAME");
                 String oldColumnName = columnName;
                 columnName = this.getFormatString(columnName, false);
                 //增加数据
-                if("ID".equals(columnName.toUpperCase())) {
+                if ("ID".equals(columnName.toUpperCase())) {
                     continue;
                 }
-                column += columnName +",";
+                column += columnName + ",";
                 values += "#{" + columnName + "},";
                 //删除数据
 
                 //更新数据
-                updateConent += columnName + "=#{" + columnName +"},";
+                updateConent += columnName + "=#{" + columnName + "},";
                 //查找数据
-                selectContent += "\t\t"+oldColumnName + " AS " + columnName + ",\n";
+                selectContent += "\t\t" + oldColumnName + " AS " + columnName + ",\n";
             }
-            selectContent = selectContent.substring(0, selectContent.length()-2);
+            selectContent = selectContent.substring(0, selectContent.length() - 2);
             selectContent += "\n\t\tfrom " + tableName + "\n";
             select.append(selectContent);
             select.append("\t</select>\n\n");
             selectList.append(selectContent);
             selectList.append("\t</select>\n\n");
-            updateConent = updateConent.substring(0,updateConent.length()-1);
+            updateConent = updateConent.substring(0, updateConent.length() - 1);
             update.append(updateConent);
             update.append(" where id = #{id}\n");
             update.append("\t</update>\n\n");
-            column = column.substring(0, column.length()-1);
-            values = values.substring(0,values.length()-1);
+            column = column.substring(0, column.length() - 1);
+            values = values.substring(0, values.length() - 1);
             String statement = insert + column + ") values(" + values + ")\n";
             add.append(statement);
             add.append("\t</insert>\n\n");
@@ -115,7 +115,7 @@ public class GenerateMapperXml {
             header.append(selectList);
             header.append(footer);
 //          System.out.println(header.toString());
-            this.outputToFile(fileName+".xml", header.toString());
+            this.outputToFile(fileName + ".xml", header.toString());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -124,6 +124,7 @@ public class GenerateMapperXml {
 
     /**
      * 处理字符串，去掉下划线“_”，并且把下划线的下一个字符变大写，flag为true，表示首字母要大写
+     *
      * @param name
      * @param flag
      * @return
@@ -132,30 +133,32 @@ public class GenerateMapperXml {
         name = name.toLowerCase();
         String[] nameTemp = name.split("_");
         StringBuffer buffer = new StringBuffer();
-        for(String str : nameTemp) {
+        for (String str : nameTemp) {
             String head = str.substring(0, 1).toUpperCase();
             String tail = str.substring(1);
-            buffer.append(head+tail);
+            buffer.append(head + tail);
         }
         StringBuffer result = null;
-        if(!flag) {
+        if (!flag) {
             result = new StringBuffer();
             String head = buffer.substring(0, 1).toLowerCase();
             String tail = buffer.substring(1);
-            result.append(head+tail);
+            result.append(head + tail);
             return result.toString();
         }
         return buffer.toString();
     }
+
     /**
      * 把String内容写到文件
+     *
      * @param fileName
      * @param content
      */
     private void outputToFile(String fileName, String content) {
         OutputStream os = null;
         try {
-            os = new FileOutputStream(path+fileName);
+            os = new FileOutputStream(path + fileName);
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
         }
@@ -174,17 +177,36 @@ public class GenerateMapperXml {
         }
     }
 
-//
-//    public static void main(String[] agrs) {
-//        GenerateMybatisXml aa = new GenerateMybatisXml();
-//        List<String> tableList = aa.getAllTableList();
-//        for(String tableName : tableList) {
-//            aa.getTableColumns(tableName);
-//        }
-////      aa.getTableColumns("loan_info");
-//    }
-
-
+    /**
+     * 删除指定文件夹下所有文件
+     */
+    public boolean delAllFile(String path) {
+        boolean flag = false;
+        File file = new File(path);
+        if (!file.exists()) {
+            return flag;
+        }
+        if (!file.isDirectory()) {
+            return flag;
+        }
+        String[] tempList = file.list();
+        File temp = null;
+        for (int i = 0; i < tempList.length; i++) {
+            if (path.endsWith(File.separator)) {
+                temp = new File(path + tempList[i]);
+            } else {
+                temp = new File(path + File.separator + tempList[i]);
+            }
+            if (temp.isFile()) {
+                temp.delete();
+            }
+            if (temp.isDirectory()) {
+                delAllFile(path + "/" + tempList[i]);//先删除文件夹里面的文件
+                flag = true;
+            }
+        }
+        return flag;
+    }
 
 
 }

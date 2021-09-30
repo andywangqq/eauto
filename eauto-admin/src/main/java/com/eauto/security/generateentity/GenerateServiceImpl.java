@@ -1,9 +1,6 @@
 package com.eauto.security.generateentity;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -98,6 +95,37 @@ public class GenerateServiceImpl {
         }
     }
 
+    /**
+     * 删除指定文件夹下所有文件
+     */
+    public boolean delAllFile(String path) {
+        boolean flag = false;
+        File file = new File(path);
+        if (!file.exists()) {
+            return flag;
+        }
+        if (!file.isDirectory()) {
+            return flag;
+        }
+        String[] tempList = file.list();
+        File temp = null;
+        for (int i = 0; i < tempList.length; i++) {
+            if (path.endsWith(File.separator)) {
+                temp = new File(path + tempList[i]);
+            } else {
+                temp = new File(path + File.separator + tempList[i]);
+            }
+            if (temp.isFile()) {
+                temp.delete();
+            }
+            if (temp.isDirectory()) {
+                delAllFile(path + "/" + tempList[i]);//先删除文件夹里面的文件
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
     public void getService() {
         for(String tableName : tableList) {
             String table = getFormatString(tableName, true);
@@ -110,7 +138,7 @@ public class GenerateServiceImpl {
             sb.append("import " + packageNameDto + "." + dto + ";\n");
             sb.append("import " + packageNameMybatis + "." + mybatis + ";\n");
             sb.append("import " + packageNameService + "." + service + ";\n");
-            sb.append("import org.apache.log4j.Logger;\n");
+            sb.append("import lombok.extern.slf4j.Slf4j;\n");
             sb.append("import org.springframework.beans.factory.annotation.Autowired;\n");
             sb.append("import org.springframework.stereotype.Service;\n");
             sb.append("import java.util.List;\n");
@@ -124,13 +152,14 @@ public class GenerateServiceImpl {
             sb.append(" */ \r\n");
             sb.append("\r\n");
 
+            sb.append("@Slf4j\n");
             sb.append("@Service(\""+service.substring(0,1).toLowerCase()+service.substring(1)+"\")\n");
             sb.append("public class " + className + " implements "+ service +" {\n\n");
 
-            sb.append("\tprivate Logger log = Logger.getLogger("+className+".class);\n");
             String instance = mybatis.substring(0,1).toLowerCase() + mybatis.substring(1);
             sb.append("\t@Autowired\n");
             sb.append("\tprivate "+mybatis+" " + instance +";\n");
+            sb.append("\r\n");
 
             sb.append("\t@Override\n");
             sb.append("\tpublic long addEntity(" + table + " param) throws Exception {\n");
@@ -144,6 +173,7 @@ public class GenerateServiceImpl {
             sb.append("\t\t\tthrow e;\n");
             sb.append("\t\t}\n");
             sb.append("\t}\n");
+            sb.append("\r\n");
 
             sb.append("\t@Override\n");
             sb.append("\tpublic boolean deleteEntity(long id) throws Exception {\n");
@@ -157,6 +187,7 @@ public class GenerateServiceImpl {
             sb.append("\t\t\tthrow e;\n");
             sb.append("\t\t}\n");
             sb.append("\t}\n");
+            sb.append("\r\n");
 
             sb.append("\t@Override\n");
             sb.append("\tpublic long updateEntity(" + table + " param) throws Exception {\n");
@@ -170,6 +201,7 @@ public class GenerateServiceImpl {
             sb.append("\t\t\tthrow e;\n");
             sb.append("\t\t}\n");
             sb.append("\t}\n");
+            sb.append("\r\n");
 
             sb.append("\t@Override\n");
             sb.append("\tpublic "+table+" findEntity(" + table + " param) throws Exception {\n");
@@ -182,6 +214,7 @@ public class GenerateServiceImpl {
             sb.append("\t\t\tthrow e;\n");
             sb.append("\t\t}\n");
             sb.append("\t}\n");
+            sb.append("\r\n");
 
             sb.append("\t@Override\n");
             sb.append("\tpublic List<"+table+"> findEntityList(" + table + " param) throws Exception {\n");

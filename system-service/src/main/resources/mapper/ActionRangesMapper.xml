@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wp.eauto.system.mapper.ActionRangesMapper">
+
+	<insert id="addEntity" parameterType="com.wp.eauto.system.domain.ActionRanges">
+		insert into action_ranges(actionRangesId,actionName,pid,actionLeve,actionRul,sort) values(#{actionRangesId},#{actionName},#{pid},#{actionLeve},#{actionRul},#{sort})
+	</insert>
+
+	<update id="deleteEntity" parameterType="long">
+		update action_ranges set status = -1 where id = #{id}
+	</update>
+
+	<update id="updateEntity" parameterType="com.wp.eauto.system.domain.ActionRanges">
+		update action_ranges set actionRangesId=#{actionRangesId},actionName=#{actionName},pid=#{pid},actionLeve=#{actionLeve},actionRul=#{actionRul},sort=#{sort} where id = #{id}
+	</update>
+
+	<select id="findEntity" parameterType="com.wp.eauto.system.domain.ActionRanges" resultType="com.wp.eauto.system.domain.ActionRanges">
+		select
+		action_ranges_id AS actionRangesId,
+		action_name AS actionName,
+		pid AS pid,
+		action_leve AS actionLeve,
+		action_rul AS actionRul,
+		sort AS sort
+		from action_ranges
+	</select>
+
+	<select id="findEntityList" parameterType="com.wp.eauto.system.domain.ActionRanges" resultType="com.wp.eauto.system.domain.ActionRanges">
+		select
+		action_ranges_id AS actionRangesId,
+		action_name AS actionName,
+		pid AS pid,
+		action_leve AS actionLeve,
+		action_rul AS actionRul,
+		sort AS sort
+		from action_ranges
+	</select>
+
+	<!--    查询活动项-->
+	<select id="getActionList" resultType="com.wp.eauto.system.viewmodel.response.action.ActionResponseModel"
+			parameterType="com.wp.eauto.system.viewmodel.request.action.ActionRequestModel">
+		select
+		action_name as actionName,
+		action_rul as actionUrl
+        from action_ranges_display d
+        inner join action_ranges r on d.action_ranges_id = r.action_ranges_id
+        where d.dealer_id = #{dealerId}
+        and d.display_position = #{displayPosition}
+        order by r.sort asc
+	</select>
+</mapper>

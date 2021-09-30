@@ -4,10 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * User:Administrator
- * Date:2021/9/29
- * Time:17:49
- * Description: No Description
+ * author name: Andy
+ * create time: 2021-09-30 15:33:32
  */
 public interface BaseMapper<T> {
     int save(T t);

@@ -3,9 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.wp.eauto.employee.mapper.EmployeeMapper">
+<mapper namespace="com.wp.eauto.system.mapper.EmployeeMapper">
 <!--    查询用户账户-->
-    <select id="getUserAccount" resultType="com.wp.eauto.employee.viewmodel.model.LoginUserAccountModel"
+    <select id="getUserAccount" resultType="com.wp.eauto.system.viewmodel.model.LoginUserAccountModel"
             parameterType="String">
         select employee_id as employeeId,
         password
@@ -15,7 +15,7 @@
         limit 1
     </select>
 <!--    查询当前登录人员信息-->
-    <select id="getEmployeeById" resultType="com.wp.eauto.employee.viewmodel.model.LoginEmployeeModel"
+    <select id="getEmployeeById" resultType="com.wp.eauto.system.viewmodel.model.LoginEmployeeModel"
             parameterType="String">
         select e.employee_name as employeeName,
         d.a_name as dealerName
@@ -28,7 +28,7 @@
 
 <!--    查询当前登录人员角色-->
 
-    <select id="getEmployeeRoles" resultType="com.wp.eauto.employee.viewmodel.model.LoginEmployeeRoleModel"
+    <select id="getEmployeeRoles" resultType="com.wp.eauto.system.viewmodel.model.LoginEmployeeRoleModel"
             parameterType="String">
        select r.role_name
         from employee_role er

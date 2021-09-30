@@ -1,18 +1,10 @@
 package com.eauto.security.generateentity;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.*;
+import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * User:Administrator
@@ -21,6 +13,7 @@ import java.util.List;
  * Description: No Description
  */
 public class GenerateEntity {
+
     private String authorName = "Andy";
     private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private  String dbname="";
@@ -45,9 +38,11 @@ public class GenerateEntity {
     public void getTableColumns(String tableName) {
         try {
             String ACCESS_DOMAIN = "private";
-            ResultSet resultSet = dbMetaData.getColumns(null, null, tableName, "%");
+            ResultSet resultSet = dbMetaData.getColumns(dbname, null, tableName, "%");
             while (resultSet.next()) {
-                ResultSet resultSetColumn = dbMetaData.getColumns(null, null, tableName, null);
+
+                ResultSet resultSetColumn = dbMetaData.getColumns(dbname, null, tableName, null);
+
                 String className = getFormatString(tableName, true);
                 StringBuffer header = new StringBuffer("package " + packageName + "\n\n");
                 StringBuffer footer = new StringBuffer();
@@ -66,12 +61,12 @@ public class GenerateEntity {
                     sb.append("\t" + ACCESS_DOMAIN + " ");
                     String columnType = resultSetColumn.getString("TYPE_NAME");
                     String COLUMN_TYPE = getColumnType(columnType);
-                    if ("Date".equals(COLUMN_TYPE)) {
+                    if ("Date".equals(COLUMN_TYPE) && !header.toString().contains("import java.util.Date;")) {
                         header.append("import java.util.Date;\n");
                     }
                     sb.append(COLUMN_TYPE + " ");
                     String columnName = resultSetColumn.getString("COLUMN_NAME");
-                    String remark = resultSetColumn.getString("REMARKS");
+                    String remark = resultSetColumn.getString("REMARKS").replaceAll("\\r\\n|\\n|\\r|    "," ");
                     columnName = this.getFormatString(columnName, false);
                     footer.append(getSetGenerater(columnName, COLUMN_TYPE));
                     sb.append(columnName + ";\t//" + remark + "\n");
@@ -87,36 +82,6 @@ public class GenerateEntity {
         }
     }
 
-//    public GenerateEntity() {
-//        try {
-//            Class.forName(driverClass);
-//            Connection conn = DriverManager.getConnection(url, username, password);
-//            dbMetaData = conn.getMetaData();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    /**
-//     * @Description: 获取所以的表
-//     * @author: ppt
-//     * @date: 2015-3-16 上午10:12:57
-//     * @return: void
-//     */
-//    public List<String> getAllTableList() {
-//        List<String> tableList = new ArrayList<String>();
-//        try {
-//            String[] types = {"TABLE"};
-//            ResultSet rs = dbMetaData.getTables(dbname, "", "%", types);
-//            while (rs.next()) {
-//                String tableName = rs.getString("TABLE_NAME");  //表名
-//                tableList.add(tableName);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return tableList;
-//    }
 
     /**
      * 处理字符串，去掉下划线“_”，并且把下划线的下一个字符变大写，flag为true，表示首字母要大写
@@ -174,6 +139,37 @@ public class GenerateEntity {
     }
 
     /**
+     * 删除指定文件夹下所有文件
+     */
+    public boolean delAllFile(String path) {
+        boolean flag = false;
+        File file = new File(path);
+        if (!file.exists()) {
+            return flag;
+        }
+        if (!file.isDirectory()) {
+            return flag;
+        }
+        String[] tempList = file.list();
+        File temp = null;
+        for (int i = 0; i < tempList.length; i++) {
+            if (path.endsWith(File.separator)) {
+                temp = new File(path + tempList[i]);
+            } else {
+                temp = new File(path + File.separator + tempList[i]);
+            }
+            if (temp.isFile()) {
+                temp.delete();
+            }
+            if (temp.isDirectory()) {
+                delAllFile(path + "/" + tempList[i]);//先删除文件夹里面的文件
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+    /**
      * 数据库类型转为java类型
      *
      * @param column
@@ -228,15 +224,5 @@ public class GenerateEntity {
         sb.append("\t}\n\n");
         return sb.toString();
     }
-
-//    public static void main(String[] agrs) {
-//        GenerateEntity aa = new GenerateEntity();
-//        List<String> tableList = aa.getAllTableList();
-//        for (String tableName : tableList) {
-//            aa.getTableColumns(tableName);
-//        }
-////      aa.getTableColumns("REPORT_REQ");
-//    }
-
 
 }
