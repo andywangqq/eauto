@@ -21,10 +21,10 @@ public class AutoGenerate {
 //    数据库配置
     private static String url = "jdbc:mysql://127.0.0.1:3306/eauto?characterEncoding=utf-8&serverTimezone=Asia/Shanghai";
     private static String username = "root";
-    private static String password = "root@3306";
+    private static String password = "root";
     private static String driverClass = "com.mysql.jdbc.Driver";
     public DatabaseMetaData dbMetaData = null;
-    private static String path = "D:\\home\\generate\\";
+    private static String path = "E:\\home\\generate\\";
 
     public AutoGenerate(){
         try {

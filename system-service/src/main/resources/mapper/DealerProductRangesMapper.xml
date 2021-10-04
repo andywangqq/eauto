@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wp.eauto.system.mapper.DealerProductRangesMapper">
+
+	<insert id="addEntity" parameterType="com.wp.eauto.system.domain.DealerProductRanges">
+		insert into dealer_product_ranges(dealerProductRangesId,productRangesId,dealerId,productName) values(#{dealerProductRangesId},#{productRangesId},#{dealerId},#{productName})
+	</insert>
+
+	<update id="deleteEntity" parameterType="long">
+		update dealer_product_ranges set status = -1 where id = #{id}
+	</update>
+
+	<update id="updateEntity" parameterType="com.wp.eauto.system.domain.DealerProductRanges">
+		update dealer_product_ranges set dealerProductRangesId=#{dealerProductRangesId},productRangesId=#{productRangesId},dealerId=#{dealerId},productName=#{productName} where id = #{id}
+	</update>
+
+	<select id="findEntity" parameterType="com.wp.eauto.system.domain.DealerProductRanges" resultType="com.wp.eauto.system.domain.DealerProductRanges">
+		select
+		dealer_product_ranges_id AS dealerProductRangesId,
+		product_ranges_id AS productRangesId,
+		dealer_id AS dealerId,
+		product_name AS productName
+		from dealer_product_ranges
+	</select>
+
+	<select id="findEntityList" parameterType="com.wp.eauto.system.domain.DealerProductRanges" resultType="com.wp.eauto.system.domain.DealerProductRanges">
+		select
+		dealer_product_ranges_id AS dealerProductRangesId,
+		product_ranges_id AS productRangesId,
+		dealer_id AS dealerId,
+		product_name AS productName
+		from dealer_product_ranges
+		where dealer_id = #{dealerId}
+	</select>
+
+
+</mapper>

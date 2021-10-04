@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wp.eauto.system.mapper.DealerMapper">
+
+	<insert id="addEntity" parameterType="com.wp.eauto.system.domain.Dealer">
+		insert into dealer(dealerId,cnName,enName,aName,website,address,registrationTime,plateNumber,telephone,dealerType,mainProduct,mainVehicle,authentication,remark,isDeleted,createUserId,createTime,updateUserId,updateTime) values(#{dealerId},#{cnName},#{enName},#{aName},#{website},#{address},#{registrationTime},#{plateNumber},#{telephone},#{dealerType},#{mainProduct},#{mainVehicle},#{authentication},#{remark},#{isDeleted},#{createUserId},#{createTime},#{updateUserId},#{updateTime})
+	</insert>
+
+	<update id="deleteEntity" parameterType="long">
+		update dealer set status = -1 where id = #{id}
+	</update>
+
+	<update id="updateEntity" parameterType="com.wp.eauto.system.domain.Dealer">
+		update dealer set dealerId=#{dealerId},cnName=#{cnName},enName=#{enName},aName=#{aName},website=#{website},address=#{address},registrationTime=#{registrationTime},plateNumber=#{plateNumber},telephone=#{telephone},dealerType=#{dealerType},mainProduct=#{mainProduct},mainVehicle=#{mainVehicle},authentication=#{authentication},remark=#{remark},isDeleted=#{isDeleted},createUserId=#{createUserId},createTime=#{createTime},updateUserId=#{updateUserId},updateTime=#{updateTime} where id = #{id}
+	</update>
+
+	<select id="findEntity" parameterType="com.wp.eauto.system.domain.Dealer" resultType="com.wp.eauto.system.domain.Dealer">
+		select
+		dealer_id AS dealerId,
+		cn_name AS cnName,
+		en_name AS enName,
+		a_name AS aName,
+		website AS website,
+		address AS address,
+		registration_time AS registrationTime,
+		plate_number AS plateNumber,
+		telephone AS telephone,
+		dealer_type AS dealerType,
+		main_product AS mainProduct,
+		main_vehicle AS mainVehicle,
+		authentication AS authentication,
+		remark AS remark,
+		is_deleted AS isDeleted,
+		create_user_id AS createUserId,
+		create_time AS createTime,
+		update_user_id AS updateUserId,
+		update_time AS updateTime
+		from dealer
+		 where dealer_id = #{dealerId}
+		 and is_deleted = 0
+	</select>
+
+	<select id="findEntityList" parameterType="com.wp.eauto.system.domain.Dealer" resultType="com.wp.eauto.system.domain.Dealer">
+		select
+		dealer_id AS dealerId,
+		cn_name AS cnName,
+		en_name AS enName,
+		a_name AS aName,
+		website AS website,
+		address AS address,
+		registration_time AS registrationTime,
+		plate_number AS plateNumber,
+		telephone AS telephone,
+		dealer_type AS dealerType,
+		main_product AS mainProduct,
+		main_vehicle AS mainVehicle,
+		authentication AS authentication,
+		remark AS remark,
+		is_deleted AS isDeleted,
+		create_user_id AS createUserId,
+		create_time AS createTime,
+		update_user_id AS updateUserId,
+		update_time AS updateTime
+		from dealer
+	</select>
+
+
+</mapper>

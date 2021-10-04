@@ -5,7 +5,7 @@ package com.wp.eauto.system.domain;
 /**
  * table name:  dealer_contact
  * author name: Andy
- * create time: 2021-09-30 15:33:33
+ * create time: 2021-10-04 08:19:30
  */ 
 
 public class DealerContact{

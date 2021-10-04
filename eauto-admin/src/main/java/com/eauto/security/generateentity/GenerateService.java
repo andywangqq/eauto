@@ -33,7 +33,7 @@ public class GenerateService {
         this.tableList = tableList;
         this.dbname = dbname;
           packageName = "com.wp.eauto." + modelname + ".service;";
-          packageNameDto = "com.wp.eauto." + modelname + ".service";
+          packageNameDto = "com.wp.eauto." + modelname + ".domain";
         this.path = path;
     }
 
@@ -130,6 +130,7 @@ public class GenerateService {
 
             sb.append("package " + packageName + "\n\n");
             sb.append("import " + packageNameDto + "." + table + ";\n");
+            sb.append("import javax.websocket.server.PathParam;;\n");
             sb.append("import java.util.List;\n");
 //            sb.append("import javax.ws.rs.POST;\n");
 //            sb.append("import javax.ws.rs.GET;\n");

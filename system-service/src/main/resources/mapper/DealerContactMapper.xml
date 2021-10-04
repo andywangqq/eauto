@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wp.eauto.system.mapper.DealerContactMapper">
+	<insert id="addEntity" parameterType="com.wp.eauto.system.domain.DealerContact">
+		insert into dealer_contact(dealerContactId,dealerId,contactName,phone,email,qq) values(#{dealerContactId},#{dealerId},#{contactName},#{phone},#{email},#{qq})
+	</insert>
+
+	<update id="deleteEntity" parameterType="long">
+		update dealer_contact set status = -1 where id = #{id}
+	</update>
+
+	<update id="updateEntity" parameterType="com.wp.eauto.system.domain.DealerContact">
+		update dealer_contact set dealerContactId=#{dealerContactId},dealerId=#{dealerId},contactName=#{contactName},phone=#{phone},email=#{email},qq=#{qq} where id = #{id}
+	</update>
+
+	<select id="findEntity" parameterType="com.wp.eauto.system.domain.DealerContact" resultType="com.wp.eauto.system.domain.DealerContact">
+		select
+		dealer_contact_id AS dealerContactId,
+		dealer_id AS dealerId,
+		contact_name AS contactName,
+		phone AS phone,
+		email AS email,
+		qq AS qq
+		from dealer_contact
+	</select>
+
+	<select id="findEntityList" parameterType="com.wp.eauto.system.domain.DealerContact" resultType="com.wp.eauto.system.domain.DealerContact">
+		select
+		dealer_contact_id AS dealerContactId,
+		dealer_id AS dealerId,
+		contact_name AS contactName,
+		phone AS phone,
+		email AS email,
+		qq AS qq
+		from dealer_contact
+		where dealer_id = #{dealerId}
+	</select>
+
+
+</mapper>

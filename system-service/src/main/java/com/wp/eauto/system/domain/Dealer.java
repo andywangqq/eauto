@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * table name:  dealer
  * author name: Andy
- * create time: 2021-09-30 15:33:33
+ * create time: 2021-10-04 08:19:30
  */ 
 
 public class Dealer{
@@ -20,7 +20,7 @@ public class Dealer{
 	private Date registrationTime;	//注册时间
 	private String plateNumber;	//本地车牌照
 	private String telephone;	//固定电话
-	private Short dealerType;	//经销商类型
+	private String dealerType;	//经销商类型
 	private String mainProduct;	//主营产品
 	private String mainVehicle;	//主营车型
 	private String authentication;	//是否已认证
@@ -112,11 +112,11 @@ public class Dealer{
 		this.telephone = telephone;
 	}
 
-	public Short getDealerType() {
+	public String getDealerType() {
 		return dealerType;
 	}
 
-	public void setDealerType(Short dealerType) {
+	public void setDealerType(String dealerType) {
 		this.dealerType = dealerType;
 	}
 

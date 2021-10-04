@@ -14,7 +14,7 @@ import java.util.List;
  * table name:  action_ranges
  * author name: Andy
  * create time: 2021-09-30 16:03:57
- */ 
+ */
 
 @Slf4j
 @Service("actionRangesService")
