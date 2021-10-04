@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wp.eauto.system.mapper.ServiceRangesMapper">
+
+	<insert id="addEntity" parameterType="com.wp.eauto.system.domain.ServiceRanges">
+		insert into service_ranges(serviceRangesId,serviceName,isDeleted,createTime,createUserId,updateTime,updateUserId) values(#{serviceRangesId},#{serviceName},#{isDeleted},#{createTime},#{createUserId},#{updateTime},#{updateUserId})
+	</insert>
+
+	<update id="deleteEntity" parameterType="long">
+		update service_ranges set status = -1 where id = #{id}
+	</update>
+
+	<update id="updateEntity" parameterType="com.wp.eauto.system.domain.ServiceRanges">
+		update service_ranges set serviceRangesId=#{serviceRangesId},serviceName=#{serviceName},isDeleted=#{isDeleted},createTime=#{createTime},createUserId=#{createUserId},updateTime=#{updateTime},updateUserId=#{updateUserId} where id = #{id}
+	</update>
+
+	<select id="findEntity" parameterType="com.wp.eauto.system.domain.ServiceRanges" resultType="com.wp.eauto.system.domain.ServiceRanges">
+		select
+		service_ranges_id AS serviceRangesId,
+		service_name AS serviceName,
+		is_deleted AS isDeleted,
+		create_time AS createTime,
+		create_user_id AS createUserId,
+		update_time AS updateTime,
+		update_user_id AS updateUserId
+		from service_ranges
+	</select>
+
+	<select id="findEntityList" parameterType="com.wp.eauto.system.domain.ServiceRanges" resultType="com.wp.eauto.system.domain.ServiceRanges">
+		select
+		service_ranges_id AS serviceRangesId,
+		service_name AS serviceName,
+		is_deleted AS isDeleted,
+		create_time AS createTime,
+		create_user_id AS createUserId,
+		update_time AS updateTime,
+		update_user_id AS updateUserId
+		from service_ranges
+		where is_deleted = 0
+	</select>
+
+
+</mapper>

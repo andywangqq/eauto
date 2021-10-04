@@ -129,6 +129,7 @@ public class GenerateMapper {
             String dto = table;
             StringBuffer sb = new StringBuffer();
             sb.append("package " + packageName + "\n\n");
+            sb.append("import com.eauto.mapper.BaseMapper;\n;\n");
             sb.append("import " + packageNameDto + "." + dto + ";\n");
             sb.append("import java.util.List;\n");
 

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wp.eauto.system.mapper.ProductRangesMapper">
+
+	<insert id="addEntity" parameterType="com.wp.eauto.system.domain.ProductRanges">
+		insert into product_ranges(productRangesId,productName,isDeleted,createTime,createUserId,updateTime,updateUserId) values(#{productRangesId},#{productName},#{isDeleted},#{createTime},#{createUserId},#{updateTime},#{updateUserId})
+	</insert>
+
+	<update id="deleteEntity" parameterType="long">
+		update product_ranges set status = -1 where id = #{id}
+	</update>
+
+	<update id="updateEntity" parameterType="com.wp.eauto.system.domain.ProductRanges">
+		update product_ranges set productRangesId=#{productRangesId},productName=#{productName},isDeleted=#{isDeleted},createTime=#{createTime},createUserId=#{createUserId},updateTime=#{updateTime},updateUserId=#{updateUserId} where id = #{id}
+	</update>
+
+	<select id="findEntity" parameterType="com.wp.eauto.system.domain.ProductRanges" resultType="com.wp.eauto.system.domain.ProductRanges">
+		select
+		product_ranges_id AS productRangesId,
+		product_name AS productName,
+		is_deleted AS isDeleted,
+		create_time AS createTime,
+		create_user_id AS createUserId,
+		update_time AS updateTime,
+		update_user_id AS updateUserId
+		from product_ranges
+	</select>
+
+	<select id="findEntityList" parameterType="com.wp.eauto.system.domain.ProductRanges" resultType="com.wp.eauto.system.domain.ProductRanges">
+		select
+		product_ranges_id AS productRangesId,
+		product_name AS productName,
+		is_deleted AS isDeleted,
+		create_time AS createTime,
+		create_user_id AS createUserId,
+		update_time AS updateTime,
+		update_user_id AS updateUserId
+		from product_ranges
+		where is_deleted = 0
+	</select>
+
+
+</mapper>
