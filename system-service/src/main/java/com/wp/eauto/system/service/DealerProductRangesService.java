@@ -1,6 +1,8 @@
 package com.wp.eauto.system.service;
 
 import com.wp.eauto.system.domain.DealerProductRanges;
+import com.wp.eauto.system.viewmodel.request.dealer.SaveDealerProductRangeListRequestModel;
+
 import javax.websocket.server.PathParam;;
 import java.util.List;
 
@@ -26,5 +28,8 @@ public interface DealerProductRangesService {
 
 	//查询实体List
 	List<DealerProductRanges> findEntityList(DealerProductRanges param) throws Exception;
+
+	//更新门店主营产品实体集合
+	long updateEntityList(SaveDealerProductRangeListRequestModel param) throws Exception;
 
 }

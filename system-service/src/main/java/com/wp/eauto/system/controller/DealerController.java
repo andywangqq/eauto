@@ -2,14 +2,13 @@ package com.wp.eauto.system.controller;
 
 import com.eauto.base.ResultCode;
 import com.eauto.base.ResultModel;
+import com.eauto.common.UUIDUtils;
 import com.wp.eauto.system.domain.Dealer;
 import com.wp.eauto.system.domain.DealerContact;
 import com.wp.eauto.system.domain.DealerProductRanges;
 import com.wp.eauto.system.domain.DealerServiceRanges;
 import com.wp.eauto.system.service.*;
-import com.wp.eauto.system.viewmodel.request.action.ActionRequestModel;
-import com.wp.eauto.system.viewmodel.request.dealer.DealerInfoRequestModel;
-import com.wp.eauto.system.viewmodel.response.action.ActionResponseModel;
+import com.wp.eauto.system.viewmodel.request.dealer.*;
 import com.wp.eauto.system.viewmodel.response.dealer.DealerContactResponseModel;
 import com.wp.eauto.system.viewmodel.response.dealer.DealerInfoResponseModel;
 import com.wp.eauto.system.viewmodel.response.dealer.DealerProductRangesResponseModel;
@@ -74,27 +73,29 @@ public class DealerController {
         result.telephone = dealer.getTelephone();
         result.website = dealer.getWebsite();
 
-        //查询经销店服务
+        //查询门店服务
         DealerServiceRanges srparam = new DealerServiceRanges();
         srparam.setDealerId(param.dealerId);
         List<DealerServiceRanges> dealerServiceRangesList = dealerServiceRangesService.findEntityList(srparam);
         if (dealerServiceRangesList != null && dealerServiceRangesList.size() > 0) {
             for (DealerServiceRanges service : dealerServiceRangesList) {
-                DealerServiceRangesResponseModel srr = new  DealerServiceRangesResponseModel();
+                DealerServiceRangesResponseModel srr = new DealerServiceRangesResponseModel();
                 srr.dealerServiceRangesId = service.getDealerServiceRangesId();
+                srr.serviceRangesId = service.getServiceRangesId();
                 srr.serviceName = service.getServiceName();
                 result.serviceRanges.add(srr);
             }
         }
 
-        //查询经销店产品
+        //查询门店产品
         DealerProductRanges prparam = new DealerProductRanges();
         prparam.setDealerId(param.dealerId);
         List<DealerProductRanges> dealerProductRangesList = dealerProductRangesService.findEntityList(prparam);
         if (dealerProductRangesList != null && dealerProductRangesList.size() > 0) {
             for (DealerProductRanges product : dealerProductRangesList) {
-                DealerProductRangesResponseModel prr = new  DealerProductRangesResponseModel();
+                DealerProductRangesResponseModel prr = new DealerProductRangesResponseModel();
                 prr.dealerProductRangesId = product.getDealerProductRangesId();
+                prr.productRangesId = product.getProductRangesId();
                 prr.productName = product.getProductName();
                 result.productRanges.add(prr);
             }
@@ -106,7 +107,7 @@ public class DealerController {
         List<DealerContact> contactList = dealerContactService.findEntityList(cparam);
         if (contactList != null && contactList.size() > 0) {
             for (DealerContact contact : contactList) {
-                DealerContactResponseModel cr = new  DealerContactResponseModel();
+                DealerContactResponseModel cr = new DealerContactResponseModel();
                 cr.dealerContactId = contact.getDealerContactId();
                 cr.contactName = contact.getContactName();
                 cr.email = contact.getEmail();
@@ -118,7 +119,102 @@ public class DealerController {
         return ResultModel.Success(result);
     }
 
+    /**
+     * 保存当前经销店信息
+     *
+     * @param param
+     * @return
+     */
+    @PostMapping("saveDealer")
+    public ResultModel<Boolean> saveDealer(SaveDealerRequestModel param) throws Exception {
 
+        //保存经销店
+        if (param.dealerId == null || param.dealerId.length() <= 0) {
+            return ResultModel.failure(ResultCode.PARAM_DEALERID_IS_BLANK);
+        }
+        if (param.cnName == null || param.cnName.length() <= 0
+                || param.aName == null || param.aName.length() <= 0
+                || param.address == null || param.address.length() <= 0
+                || param.authentication == null || param.authentication.length() <= 0
+                || param.dealerType == null || param.dealerType.length() <= 0
+                || param.telephone == null || param.telephone.length() <= 0
+                || param.registrationTime == null
+        ) {
+            return ResultModel.failure(ResultCode.PARAM_NOT_COMPLETE);
+        }
+
+        Dealer dparam = new Dealer();
+        dparam.setDealerId(param.dealerId);
+        Dealer dealer = dealerService.findEntity(dparam);
+        if (dealer == null) {
+            return ResultModel.failure(ResultCode.DEALER_NOT_FOUNT);
+        }
+        dealer.setCnName(param.cnName);
+        dealer.setEnName(param.enName);
+        dealer.setAName(param.aName);
+        dealer.setWebsite(param.website);
+        dealer.setAddress(param.address);
+        dealer.setDealerType(param.dealerType);
+        dealer.setRegistrationTime(param.registrationTime);
+        dealer.setPlateNumber(param.plateNumber);
+        dealer.setTelephone(param.telephone);
+        dealer.setAuthentication(param.authentication);
+        dealer.setRemark(param.remark);
+        Long dr = dealerService.updateEntity(dealer);
+        if (dr <= 0) {
+            return ResultModel.failure(ResultCode.DEALER_SAVE_ERROR);
+        }
+
+        //保存经销店主营服务
+
+        //保存经销店联系人
+
+        return ResultModel.Success();
+    }
+
+    /**
+     * 保存门店主营产品
+     * @param param
+     * @return
+     */
+    @PostMapping("saveDealerProductRanges")
+    public ResultModel<Boolean> saveDealerProductRanges(SaveDealerProductRangeListRequestModel param) throws Exception{
+        if(param.dealerProductRangeList!=null && param.dealerProductRangeList.size()>0){
+            for (SaveDealerProductRangesRequestModel item:param.dealerProductRangeList
+                 ) {
+                if(item.dealerProductRangesId==null||item.dealerProductRangesId.length()<=0){
+                    item.dealerProductRangesId = UUIDUtils.random().toString();
+                }
+            }
+        }
+      Long r =  dealerProductRangesService.updateEntityList(param);
+    if(r<=0){
+        return ResultModel.failure(ResultCode.DEALER_PRODUCT_RANGES_SAVE_ERROR);
+    }
+    return ResultModel.Success();
+    }
+
+    /**
+     * 保存门店主营服务
+     * @param param
+     * @return
+     */
+    @PostMapping("saveDealerServiceRanges")
+    public ResultModel<Boolean> saveDealerServiceRanges(SaveDealerServiceRangeListRequestModel param) throws Exception{
+        if(param.dealerServiceRangeList!=null && param.dealerServiceRangeList.size()>0){
+            for (SaveDealerServiceRangesRequestModel item:param.dealerServiceRangeList
+            ) {
+                if(item.dealerServiceRangesId==null||item.dealerServiceRangesId.length()<=0){
+                    item.dealerServiceRangesId = UUIDUtils.random().toString();
+                }
+            }
+        }
+        Long r =  dealerServiceRangesService.updateEntityList(param);
+        if(r<=0){
+            return ResultModel.failure(ResultCode.DEALER_SERVICE_RANGES_SAVE_ERROR);
+        }
+        return ResultModel.Success();
+    }
 
 }
 

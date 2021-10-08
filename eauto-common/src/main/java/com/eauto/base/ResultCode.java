@@ -16,11 +16,13 @@ public enum ResultCode {
  PARAM_IS_BLANK(1002,"参数为空"),
  PARMA_TYPE_BIND_ERROR(1003,"参数类型错误"),
  PARAM_NOT_COMPLETE(1004,"参数缺失"),
-
  PARAM_DEALERID_IS_BLANK(1005,"经销店id为空"),
  PARMA_ACTIONPOSITION_IS_BLANK(1006,"活动项显示位置为空"),
 
- DEALER_NOT_FOUNT(1007,"未找到经销店"),
+ DEALER_NOT_FOUNT(1007,"未找到门店"),
+ DEALER_SAVE_ERROR(1008,"门店保存错误"),
+ DEALER_PRODUCT_RANGES_SAVE_ERROR(1009,"门店主营产品范围保存错误"),
+ DEALER_SERVICE_RANGES_SAVE_ERROR(1010,"门店主营服务范围保存错误"),
 
  /*系统模块错误：2001-2999*/
  USER_NOT_LOGGEN_IN(2001,"用户未登录，访问的路径需要验证，请登录"),

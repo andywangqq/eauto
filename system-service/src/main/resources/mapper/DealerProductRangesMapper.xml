@@ -2,19 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wp.eauto.system.mapper.DealerProductRangesMapper">
 
-	<insert id="addEntity" parameterType="com.wp.eauto.system.domain.DealerProductRanges">
+    <insert id="addEntity" parameterType="com.wp.eauto.system.domain.DealerProductRanges">
 		insert into dealer_product_ranges(dealerProductRangesId,productRangesId,dealerId,productName) values(#{dealerProductRangesId},#{productRangesId},#{dealerId},#{productName})
 	</insert>
 
-	<update id="deleteEntity" parameterType="long">
+    <update id="deleteEntity" parameterType="long">
 		update dealer_product_ranges set status = -1 where id = #{id}
 	</update>
 
-	<update id="updateEntity" parameterType="com.wp.eauto.system.domain.DealerProductRanges">
+    <update id="updateEntity" parameterType="com.wp.eauto.system.domain.DealerProductRanges">
 		update dealer_product_ranges set dealerProductRangesId=#{dealerProductRangesId},productRangesId=#{productRangesId},dealerId=#{dealerId},productName=#{productName} where id = #{id}
 	</update>
 
-	<select id="findEntity" parameterType="com.wp.eauto.system.domain.DealerProductRanges" resultType="com.wp.eauto.system.domain.DealerProductRanges">
+    <select id="findEntity" parameterType="com.wp.eauto.system.domain.DealerProductRanges"
+            resultType="com.wp.eauto.system.domain.DealerProductRanges">
 		select
 		dealer_product_ranges_id AS dealerProductRangesId,
 		product_ranges_id AS productRangesId,
@@ -23,7 +24,8 @@
 		from dealer_product_ranges
 	</select>
 
-	<select id="findEntityList" parameterType="com.wp.eauto.system.domain.DealerProductRanges" resultType="com.wp.eauto.system.domain.DealerProductRanges">
+    <select id="findEntityList" parameterType="com.wp.eauto.system.domain.DealerProductRanges"
+            resultType="com.wp.eauto.system.domain.DealerProductRanges">
 		select
 		dealer_product_ranges_id AS dealerProductRangesId,
 		product_ranges_id AS productRangesId,
@@ -33,5 +35,31 @@
 		where dealer_id = #{dealerId}
 	</select>
 
+<!--    更新门店主营产品范围-->
+    <insert id="updateEntityList"
+            parameterType="com.wp.eauto.system.viewmodel.request.dealer.SaveDealerProductRangeListRequestModel">
+        -- 删除已经移除的门店主营产品
+        delete from dealer_product_ranges
+        where dealer_id = #{dealerId}
+        <if test="dealerProductRangeList!=null and dealerProductRangeList.length>0">
+            AND dealer_product_ranges_id NOT IN (
+            <foreach collection="dealerProductRangeList" item="item" index="index" separator=",">
+                #{item.dealerProductRangesId}
+            </foreach>
+            )
+
+            -- 新增门店主营产品
+            insert into dealer_product_ranges(dealerProductRangesId,productRangesId,dealerId,productName)
+            values
+            <foreach collection="dealerProductRangeList" item="item" index="index" separator=",">
+                (
+                #{item.dealerProductRangesId},
+                #{item.productRangesId},
+                #{dealerId},
+                #{item.productName}
+                )
+            </foreach>
+        </if>
+    </insert>
 
 </mapper>

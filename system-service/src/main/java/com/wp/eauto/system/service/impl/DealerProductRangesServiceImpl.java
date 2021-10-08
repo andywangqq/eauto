@@ -3,6 +3,7 @@ package com.wp.eauto.system.service.impl;
 import com.wp.eauto.system.domain.DealerProductRanges;
 import com.wp.eauto.system.mapper.DealerProductRangesMapper;
 import com.wp.eauto.system.service.DealerProductRangesService;
+import com.wp.eauto.system.viewmodel.request.dealer.SaveDealerProductRangeListRequestModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,6 +80,19 @@ public class DealerProductRangesServiceImpl implements DealerProductRangesServic
 			return dealerProductRangesMapper.findEntityList(param);
 		} catch(Exception e) {
 			log.info("findEntityList异常");
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	//更新门店主营产品实体集合
+	@Override
+	public long updateEntityList(SaveDealerProductRangeListRequestModel param) throws Exception{
+		try {
+			log.info("updateEntityList");
+			return dealerProductRangesMapper.updateEntityList(param);
+		} catch(Exception e) {
+			log.info("updateEntityList");
 			e.printStackTrace();
 			throw e;
 		}

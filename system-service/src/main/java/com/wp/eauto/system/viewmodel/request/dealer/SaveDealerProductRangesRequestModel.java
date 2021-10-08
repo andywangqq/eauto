@@ -1,9 +1,15 @@
-package com.wp.eauto.system.viewmodel.response.dealer;
+package com.wp.eauto.system.viewmodel.request.dealer;
 
 import lombok.Data;
 
+/**
+ * User:Administrator
+ * Date:2021/10/8
+ * Time:14:15
+ * Description: No Description
+ */
 @Data
-public class DealerProductRangesResponseModel {
+public class SaveDealerProductRangesRequestModel {
     /**
      * 门店产品范围id
      */
