@@ -16,11 +16,11 @@ mybatis:
   config-location: classpath:/mybatis/mybatis-config.xml #mybatis配置文件路径
 spring:
   application:
-    name: eauto-employee #项目名
+    name: system-service #项目名
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/eauto?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
-    password: root@3306
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   freemarker:
     prefer-file-system-access: false
@@ -28,4 +28,4 @@ jdbc:
   driverClass: com.mysql.jdbc.Driver
   url: jdbc:mysql://localhost:3306/eauto
   username: root
-  password: root@3306
+  password: root

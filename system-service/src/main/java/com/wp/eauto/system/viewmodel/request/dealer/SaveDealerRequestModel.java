@@ -1,6 +1,7 @@
 package com.wp.eauto.system.viewmodel.request.dealer;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -43,6 +44,7 @@ public class SaveDealerRequestModel {
     /**
      * 注册时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public Date registrationTime;
     /**
      * 所在地车牌
@@ -60,4 +62,6 @@ public class SaveDealerRequestModel {
      * 备注
      */
     public String remark;
+
+
 }

@@ -89,7 +89,7 @@ public class GenerateMapperXml {
                 //删除数据
 
                 //更新数据
-                updateConent += columnName + "=#{" + columnName + "},";
+                updateConent += oldColumnName + "=#{" + columnName + "},";
                 //查找数据
                 selectContent += "\t\t" + oldColumnName + " AS " + columnName + ",\n";
             }

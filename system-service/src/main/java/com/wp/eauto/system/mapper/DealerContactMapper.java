@@ -2,6 +2,8 @@ package com.wp.eauto.system.mapper;
 
 import com.eauto.mapper.BaseMapper;
 import com.wp.eauto.system.domain.DealerContact;
+import com.wp.eauto.system.viewmodel.request.dealer.SaveDealerContactListRequestModel;
+
 import java.util.List;
 
 /**
@@ -22,5 +24,7 @@ public interface DealerContactMapper extends BaseMapper<DealerContact> {
 	DealerContact findEntity(DealerContact param);
 
 	List<DealerContact> findEntityList(DealerContact param);
+	//	更新门店联系人
+	long updateEntityList(SaveDealerContactListRequestModel param);
 
 }

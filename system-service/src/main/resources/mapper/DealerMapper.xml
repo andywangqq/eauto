@@ -11,7 +11,8 @@
 	</update>
 
 	<update id="updateEntity" parameterType="com.wp.eauto.system.domain.Dealer">
-		update dealer set dealerId=#{dealerId},cnName=#{cnName},enName=#{enName},aName=#{aName},website=#{website},address=#{address},registrationTime=#{registrationTime},plateNumber=#{plateNumber},telephone=#{telephone},dealerType=#{dealerType},mainProduct=#{mainProduct},mainVehicle=#{mainVehicle},authentication=#{authentication},remark=#{remark},isDeleted=#{isDeleted},createUserId=#{createUserId},createTime=#{createTime},updateUserId=#{updateUserId},updateTime=#{updateTime} where id = #{id}
+		update dealer set cn_name=#{cnName},en_name=#{enName},a_name=#{aName},website=#{website},address=#{address},registration_time=#{registrationTime},plate_number=#{plateNumber},telephone=#{telephone},dealer_type=#{dealerType},main_product=#{mainProduct},main_vehicle=#{mainVehicle},authentication=#{authentication},remark=#{remark},is_deleted=#{isDeleted},create_user_id=#{createUserId},create_time=#{createTime},update_user_id=#{updateUserId},update_time=#{updateTime}
+		where dealer_id=#{dealerId}
 	</update>
 
 	<select id="findEntity" parameterType="com.wp.eauto.system.domain.Dealer" resultType="com.wp.eauto.system.domain.Dealer">
@@ -36,8 +37,6 @@
 		update_user_id AS updateUserId,
 		update_time AS updateTime
 		from dealer
-		 where dealer_id = #{dealerId}
-		 and is_deleted = 0
 	</select>
 
 	<select id="findEntityList" parameterType="com.wp.eauto.system.domain.Dealer" resultType="com.wp.eauto.system.domain.Dealer">

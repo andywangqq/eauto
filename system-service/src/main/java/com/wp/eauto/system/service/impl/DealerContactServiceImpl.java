@@ -3,6 +3,7 @@ package com.wp.eauto.system.service.impl;
 import com.wp.eauto.system.domain.DealerContact;
 import com.wp.eauto.system.mapper.DealerContactMapper;
 import com.wp.eauto.system.service.DealerContactService;
+import com.wp.eauto.system.viewmodel.request.dealer.SaveDealerContactListRequestModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,6 +80,19 @@ public class DealerContactServiceImpl implements DealerContactService {
 			return dealerContactMapper.findEntityList(param);
 		} catch(Exception e) {
 			log.info("findEntityList异常");
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	//	更新门店联系人
+	@Override
+	public long updateEntityList(SaveDealerContactListRequestModel param) throws Exception{
+		try {
+			log.info("updateEntityList");
+			return dealerContactMapper.updateEntityList(param);
+		} catch(Exception e) {
+			log.info("updateEntityList异常");
 			e.printStackTrace();
 			throw e;
 		}

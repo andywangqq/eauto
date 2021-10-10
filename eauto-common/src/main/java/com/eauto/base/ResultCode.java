@@ -23,6 +23,7 @@ public enum ResultCode {
  DEALER_SAVE_ERROR(1008,"门店保存错误"),
  DEALER_PRODUCT_RANGES_SAVE_ERROR(1009,"门店主营产品范围保存错误"),
  DEALER_SERVICE_RANGES_SAVE_ERROR(1010,"门店主营服务范围保存错误"),
+ DEALER_CONTACT_SAVE_ERROR(1010,"门店联系人保存错误"),
 
  /*系统模块错误：2001-2999*/
  USER_NOT_LOGGEN_IN(2001,"用户未登录，访问的路径需要验证，请登录"),

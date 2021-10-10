@@ -14,10 +14,12 @@ import com.wp.eauto.system.viewmodel.response.dealer.DealerInfoResponseModel;
 import com.wp.eauto.system.viewmodel.response.dealer.DealerProductRangesResponseModel;
 import com.wp.eauto.system.viewmodel.response.dealer.DealerServiceRangesResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -177,16 +179,16 @@ public class DealerController {
      * @param param
      * @return
      */
-    @PostMapping("saveDealerProductRanges")
-    public ResultModel<Boolean> saveDealerProductRanges(SaveDealerProductRangeListRequestModel param) throws Exception{
-        if(param.dealerProductRangeList!=null && param.dealerProductRangeList.size()>0){
-            for (SaveDealerProductRangesRequestModel item:param.dealerProductRangeList
-                 ) {
-                if(item.dealerProductRangesId==null||item.dealerProductRangesId.length()<=0){
-                    item.dealerProductRangesId = UUIDUtils.random().toString();
-                }
-            }
-        }
+    @PostMapping(value = "saveDealerProductRanges", produces = "application/json;charset=UTF-8")
+    public ResultModel<Boolean> saveDealerProductRanges(@RequestBody SaveDealerProductRangeListRequestModel param) throws Exception{
+//        if(param.dealerProductRangeList!=null && param.dealerProductRangeList.size()>0){
+//            for (SaveDealerProductRangesRequestModel item:param.dealerProductRangeList
+//                 ) {
+//                if(item.dealerProductRangesId==null||item.dealerProductRangesId.length()<=0){
+//                    item.dealerProductRangesId = UUIDUtils.random().toString();
+//                }
+//            }
+//        }
       Long r =  dealerProductRangesService.updateEntityList(param);
     if(r<=0){
         return ResultModel.failure(ResultCode.DEALER_PRODUCT_RANGES_SAVE_ERROR);
@@ -216,6 +218,29 @@ public class DealerController {
         return ResultModel.Success();
     }
 
+    @PostMapping("saveDealerContact")
+    public ResultModel<Boolean> saveDealerContact(SaveDealerContactListRequestModel param) throws Exception{
+        if(param.dealerContactList!=null && param.dealerContactList.size()>0){
+            for (SaveDealerContactRequestModel item:param.dealerContactList
+            ) {
+                if(item.dealerContactId==null||item.dealerContactId.length()<=0){
+                    item.dealerContactId = UUIDUtils.random().toString();
+                }
+            }
+        }
+        Long r =  dealerContactService.updateEntityList(param);
+        if(r<=0){
+            return ResultModel.failure(ResultCode.DEALER_CONTACT_SAVE_ERROR);
+        }
+        return ResultModel.Success();
+    }
+
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class,new CustomDateEditor(dateFormat, false));
+    }
 }
 
 

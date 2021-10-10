@@ -51,8 +51,7 @@ public class DealerServiceImpl implements DealerService {
 	public long updateEntity(Dealer param) throws Exception {
 		try {
 			log.info("updateEntity");
-			dealerMapper.updateEntity(param);
-			return 0;
+			return dealerMapper.updateEntity(param);
 		} catch(Exception e) {
 			log.info("updateEntity异常");
 			e.printStackTrace();

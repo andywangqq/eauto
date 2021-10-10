@@ -193,8 +193,8 @@ public class GenerateServiceImpl {
             sb.append("\tpublic long updateEntity(" + table + " param) throws Exception {\n");
             sb.append("\t\ttry {\n");
             sb.append("\t\t\tlog.info(\"updateEntity\");\n");
-            sb.append("\t\t\t"+instance+".updateEntity(param);\n");
-            sb.append("\t\t\treturn 0;\n");
+            sb.append("\t\t\treturn "+instance+".updateEntity(param);\n");
+//            sb.append("\t\t\treturn 0;\n");
             sb.append("\t\t} catch(Exception e) {\n");
             sb.append("\t\t\tlog.info(\"updateEntity异常\");\n");
             sb.append("\t\t\te.printStackTrace();\n");
