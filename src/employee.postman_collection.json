@@ -1,0 +1,160 @@
+{
+	"info": {
+		"_postman_id": "8ce673f1-bddc-4e8c-9341-ed097214a3af",
+		"name": "employee",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userName",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "cccc",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:1112/eauto/employee/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1112",
+					"path": [
+						"eauto",
+						"employee",
+						"login"
+					],
+					"query": [
+						{
+							"key": "userName",
+							"value": "admin",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "cccc",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "登录",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userName",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "cccc",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:1112/eauto/employee/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1112",
+							"path": [
+								"eauto",
+								"employee",
+								"login"
+							],
+							"query": [
+								{
+									"key": "userName",
+									"value": "admin",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "cccc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 27 Sep 2021 17:15:16 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 1,\n    \"massage\": \"成功\",\n    \"data\": {\n        \"employeeName\": \"admin\",\n        \"dealerName\": \"dealerName\",\n        \"roleNames\": [\n            {\n                \"roleName\": \"管理员\"\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "getActionList",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "dealerId",
+							"value": "a23abc3e-1b4f-11ec-aa1c-18c04d2a55cd",
+							"type": "text"
+						},
+						{
+							"key": "displayPosition",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:1112/eauto/action/getActionList",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1112",
+					"path": [
+						"eauto",
+						"action",
+						"getActionList"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
