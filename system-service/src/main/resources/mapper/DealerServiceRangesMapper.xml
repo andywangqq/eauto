@@ -33,30 +33,20 @@
 		where dealer_id = #{dealerId}
 	</select>
 
-	<!--    更新门店主营服务范围-->
 	<insert id="updateEntityList"
 			parameterType="com.wp.eauto.system.viewmodel.request.dealer.SaveDealerServiceRangeListRequestModel">
-		-- 删除已经移除的门店主营服务
-		delete from dealer_service_ranges
-		where dealer_id = #{dealerId}
-		<if test="dealerServiceRangeList!=null and dealerServiceRangeList.length>0">
-			AND dealer_service_ranges_id NOT IN (
-			<foreach collection="dealerServiceRangeList" item="item" index="index" separator=",">
-				#{item.dealerServiceRangesId}
-			</foreach>
-			)
-
-			-- 新增门店主营服务
+		delete from dealer_service_ranges where dealer_id = #{dealerId};
+		<if test="dealerServiceRanges != null and dealerServiceRanges.size() > 0">
 			insert into dealer_service_ranges(dealer_service_ranges_id,service_ranges_id,dealer_id,service_name)
 			values
-			<foreach collection="dealerServiceRangeList" item="item" index="index" separator=",">
+			<foreach collection="dealerServiceRanges" item="item" index="index" separator=",">
 				(
 				#{item.dealerServiceRangesId},
 				#{item.serviceRangesId},
 				#{dealerId},
 				#{item.serviceName}
 				)
-			</foreach>
+			</foreach>;
 		</if>
 	</insert>
 </mapper>

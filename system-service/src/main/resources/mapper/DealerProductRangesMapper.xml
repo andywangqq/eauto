@@ -38,18 +38,14 @@
 
     <insert id="updateEntityList"
             parameterType="com.wp.eauto.system.viewmodel.request.dealer.SaveDealerProductRangeListRequestModel">
-        delete from dealer_product_ranges where dealer_id = #{dealerId}
-        <if test="dealerProductRangeList != null and dealerProductRangeList.size() > 0">
-            AND dealer_product_ranges_id NOT IN
-            <foreach collection="dealerProductRangeList" item="item" index="index" open="("
-                     separator="," close=")">
-                #{item.dealerProductRangesId}
-            </foreach>;
-            insert into dealer_product_ranges (dealer_product_ranges_id,product_ranges_id,dealer_id,product_name) values <foreach collection="dealerProductRangeList" item="item" index="index" separator=",">
-                (#{item.dealerProductRangesId},#{item.productRangesId},#{dealerId},#{item.productName})
-            </foreach>;
+		delete from dealer_product_ranges where dealer_id = #{dealerId};
+		<if test="dealerProductRanges != null and dealerProductRanges.size() > 0">
+			insert into dealer_product_ranges (dealer_product_ranges_id,product_ranges_id,dealer_id,product_name) values
+			<foreach collection="dealerProductRanges" item="item" index="index" separator=",">
+				(#{item.dealerProductRangesId},#{item.productRangesId},#{dealerId},#{item.productName})
+			</foreach>;
+		</if>
 
-        </if>
     </insert>
 
 </mapper>

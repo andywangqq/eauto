@@ -14,12 +14,12 @@ import java.util.List;
 @Data
 public class SaveDealerServiceRangeListRequestModel {
     public SaveDealerServiceRangeListRequestModel(){
-        this.dealerServiceRangeList = new ArrayList<>();
+        this.dealerServiceRanges = new ArrayList<>();
     }
     /**
      * 门店Id
      */
     public String dealerId;
 
-    public List<SaveDealerServiceRangesRequestModel> dealerServiceRangeList;
+    public List<SaveDealerServiceRangesRequestModel> dealerServiceRanges;
 }

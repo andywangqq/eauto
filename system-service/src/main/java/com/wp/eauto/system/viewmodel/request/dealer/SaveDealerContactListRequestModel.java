@@ -8,12 +8,12 @@ import java.util.List;
 @Data
 public class SaveDealerContactListRequestModel {
     public SaveDealerContactListRequestModel() {
-        this.dealerContactList = new ArrayList<>();
+        this.dealerContacts = new ArrayList<>();
     }
 
     /**
      * 门店Id
      */
     public String dealerId;
-    public List<SaveDealerContactRequestModel> dealerContactList;
+    public List<SaveDealerContactRequestModel> dealerContacts;
 }
