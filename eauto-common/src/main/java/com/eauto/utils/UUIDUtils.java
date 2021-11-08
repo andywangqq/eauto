@@ -1,4 +1,4 @@
-package com.eauto.common;
+package com.eauto.utils;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;

@@ -2,7 +2,7 @@ package com.wp.eauto.system.controller;
 
 import com.eauto.base.ResultCode;
 import com.eauto.base.ResultModel;
-import com.eauto.common.UUIDUtils;
+import com.eauto.utils.UUIDUtils;
 import com.wp.eauto.system.domain.Dealer;
 import com.wp.eauto.system.domain.DealerContact;
 import com.wp.eauto.system.domain.DealerProductRanges;

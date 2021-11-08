@@ -12,5 +12,11 @@
     <artifactId>eauto-common</artifactId>
     <packaging>jar</packaging>
     <description>公共模块</description>
-
+    <dependencies>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>5.1.4</version>
+        </dependency>
+    </dependencies>
 </project>

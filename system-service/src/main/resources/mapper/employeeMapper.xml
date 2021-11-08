@@ -36,4 +36,16 @@
         where r.is_deleted = 0
         and er.employee_id = #{employeeId}
     </select>
+
+
+    <!--    查询人员列表-->
+
+    <select id="queryEmployeeList" resultType="com.wp.eauto.system.viewmodel.model.LoginEmployeeRoleModel"
+            parameterType="String">
+      select e.employee_id,employee_name,employee_status,r.role_name,d.department_name
+from employee e
+inner join employee_role er on e.employee_id = er.employee_id
+inner join role r on er.role_id = r.role_id
+left join departments d on e.department_id = d.departments_id
+    </select>
 </mapper>

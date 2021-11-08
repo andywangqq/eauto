@@ -1,4 +1,4 @@
-package com.eauto.common;
+package com.eauto.utils;
 
 import java.io.File;
 import java.io.FileWriter;
