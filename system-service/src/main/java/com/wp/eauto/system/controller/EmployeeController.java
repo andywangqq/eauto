@@ -63,7 +63,7 @@ public class EmployeeController {
         return ResultModel.Success(result);
     }
 
-    public ResultModel<EmployeeListResponseModel> queryEmployeeList(@RequestBody EmployeeListRequestModel param){
-
-    }
+//    public ResultModel<EmployeeListResponseModel> queryEmployeeList(@RequestBody EmployeeListRequestModel param){
+//
+//    }
 }
