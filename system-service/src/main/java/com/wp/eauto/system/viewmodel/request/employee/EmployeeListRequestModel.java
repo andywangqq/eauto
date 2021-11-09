@@ -3,6 +3,9 @@ package com.wp.eauto.system.viewmodel.request.employee;
 import com.wp.eauto.system.viewmodel.request.BasePageRequestModel;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+
 /**
  * User:Administrator
  * Date:2021/11/8
@@ -10,11 +13,12 @@ import lombok.Data;
  * Description: No Description
  */
 @Data
-public class EmployeeListRequestModel extends BasePageRequestModel {
+public class EmployeeListRequestModel extends BasePageRequestModel implements Serializable {
 
     /**
      * 门店Id
      */
+    @NotNull(message = "门店不能为空")
     public String dealerId;
     /**
      * 姓名

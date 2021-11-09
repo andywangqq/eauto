@@ -3,6 +3,8 @@ package com.wp.eauto.system.viewmodel.request.dealer;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.util.Date;
 
 /**
@@ -20,6 +22,7 @@ public class SaveDealerRequestModel {
     /**
      * 经销店中文名称
      */
+    @NotNull(message="门店名称不能为空")
     public String cnName;
     /**
      * 经销店英文名称
@@ -40,10 +43,12 @@ public class SaveDealerRequestModel {
     /**
      * 经销店类型（经营方式）
      */
+    @NotNull(message="经营方式不能为空")
     public String dealerType;
     /**
      * 注册时间
      */
+    @Past
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     public Date registrationTime;
     /**
@@ -57,6 +62,7 @@ public class SaveDealerRequestModel {
     /**
      * 是否已认证
      */
+    @NotNull(message="是否已认证不能为空")
     public String authentication;
     /**
      * 备注

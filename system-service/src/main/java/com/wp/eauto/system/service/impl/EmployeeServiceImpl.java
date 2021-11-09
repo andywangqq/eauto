@@ -1,5 +1,6 @@
 package com.wp.eauto.system.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wp.eauto.system.domain.Employee;
 import com.wp.eauto.system.viewmodel.model.LoginEmployeeModel;
@@ -131,7 +132,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public PageInfo<List<EmployeeListResponseModel>> queryEmployeeList(EmployeeListRequestModel param) throws Exception {
         try{
-            return employeeMapper.queryEmployeeList(param);
+            return PageHelper.startPage(param.getPageIndex(), param.getPageSize()).doSelectPageInfo(() -> employeeMapper.queryEmployeeList(param));
         }catch(Exception e){
             log.info("queryEmployeeList");
             e.printStackTrace();

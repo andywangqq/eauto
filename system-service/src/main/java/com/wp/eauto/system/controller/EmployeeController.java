@@ -2,6 +2,7 @@ package com.wp.eauto.system.controller;
 
 import com.eauto.base.ResultCode;
 import com.eauto.base.ResultModel;
+import com.github.pagehelper.PageInfo;
 import com.wp.eauto.system.service.EmployeeService;
 import com.wp.eauto.system.viewmodel.model.LoginEmployeeModel;
 import com.wp.eauto.system.viewmodel.model.LoginEmployeeRoleModel;
@@ -63,7 +64,9 @@ public class EmployeeController {
         return ResultModel.Success(result);
     }
 
-//    public ResultModel<EmployeeListResponseModel> queryEmployeeList(@RequestBody EmployeeListRequestModel param){
-//
-//    }
+    @PostMapping("queryEmployeeList")
+    public ResultModel<PageInfo<List<EmployeeListResponseModel>>> queryEmployeeList(@RequestBody EmployeeListRequestModel param) throws Exception {
+        PageInfo<List<EmployeeListResponseModel>> result =  employeeService.queryEmployeeList(param);
+        return ResultModel.Success(result);
+    }
 }
