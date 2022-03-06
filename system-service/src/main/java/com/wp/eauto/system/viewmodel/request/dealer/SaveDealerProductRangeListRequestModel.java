@@ -14,12 +14,12 @@ import java.util.List;
 @Data
 public class SaveDealerProductRangeListRequestModel {
     public SaveDealerProductRangeListRequestModel(){
-        this.dealerProductRanges = new ArrayList<>();
+        this.dealerProductRangeList = new ArrayList<>();
     }
     /**
      * 门店Id
      */
     public String dealerId;
 
-    public List<SaveDealerProductRangesRequestModel> dealerProductRanges;
+    public List<SaveDealerProductRangesRequestModel> dealerProductRangeList;
 }

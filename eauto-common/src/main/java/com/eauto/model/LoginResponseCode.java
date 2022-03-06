@@ -21,9 +21,9 @@ public enum LoginResponseCode {
         this.code = code;
         this.message = message;
     }
-    public static Map<String,Object> buildEnumResponseVO(LoginResponseCode responseCode, Object data){
-        return new ResponseVO(responseCode.code,responseCode.message,data);
-    }
+//    public static Map<String,Object> buildEnumResponseVO(LoginResponseCode responseCode, Object data){
+//        return new ResponseVO(responseCode.code,responseCode.message,data);
+//    }
     public static Map<String,Object> buildReturnMap(LoginResponseCode responseCode,Object data){
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("code",responseCode.code);

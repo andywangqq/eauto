@@ -50,7 +50,7 @@ public class DealerController {
      * @return
      */
     @PostMapping("getDealerInfo")
-    public ResultModel<DealerInfoResponseModel> getDealerInfo(@RequestBody DealerInfoRequestModel param) throws Exception {
+    public ResultModel<DealerInfoResponseModel> getDealerInfo(DealerInfoRequestModel param) throws Exception {
         if (param.dealerId == null || param.dealerId.length() <= 0) {
             return ResultModel.failure(ResultCode.PARAM_DEALERID_IS_BLANK);
         }
@@ -85,7 +85,7 @@ public class DealerController {
                 srr.dealerServiceRangesId = service.getDealerServiceRangesId();
                 srr.serviceRangesId = service.getServiceRangesId();
                 srr.serviceName = service.getServiceName();
-                result.dealerServiceRanges.add(srr);
+                result.serviceRanges.add(srr);
             }
         }
 
@@ -99,7 +99,7 @@ public class DealerController {
                 prr.dealerProductRangesId = product.getDealerProductRangesId();
                 prr.productRangesId = product.getProductRangesId();
                 prr.productName = product.getProductName();
-                result.dealerProductRanges.add(prr);
+                result.productRanges.add(prr);
             }
         }
 
@@ -115,7 +115,7 @@ public class DealerController {
                 cr.email = contact.getEmail();
                 cr.phone = contact.getPhone();
                 cr.qq = contact.getQq();
-                result.dealerContacts.add(cr);
+                result.contacts.add(cr);
             }
         }
         return ResultModel.Success(result);
@@ -128,7 +128,7 @@ public class DealerController {
      * @return
      */
     @PostMapping("saveDealer")
-    public ResultModel<Boolean> saveDealer(@RequestBody SaveDealerRequestModel param) throws Exception {
+    public ResultModel<Boolean> saveDealer(SaveDealerRequestModel param) throws Exception {
 
         //保存经销店
         if (param.dealerId == null || param.dealerId.length() <= 0) {
@@ -181,19 +181,18 @@ public class DealerController {
      */
     @PostMapping(value = "saveDealerProductRanges", produces = "application/json;charset=UTF-8")
     public ResultModel<Boolean> saveDealerProductRanges(@RequestBody SaveDealerProductRangeListRequestModel param) throws Exception{
-        if(param.dealerProductRanges!=null && param.dealerProductRanges.size()>0){
-            for (SaveDealerProductRangesRequestModel item:param.dealerProductRanges
-                 ) {
-                if(item.dealerProductRangesId==null||item.dealerProductRangesId.length()<=0){
-                    item.dealerProductRangesId = UUIDUtils.random().toString();
-                }
-            }
-        }
-        try{
-            dealerProductRangesService.updateEntityList(param);
-        }catch(Exception ex){
-            return ResultModel.failure(ResultCode.DEALER_PRODUCT_RANGES_SAVE_ERROR);
-        }
+//        if(param.dealerProductRangeList!=null && param.dealerProductRangeList.size()>0){
+//            for (SaveDealerProductRangesRequestModel item:param.dealerProductRangeList
+//                 ) {
+//                if(item.dealerProductRangesId==null||item.dealerProductRangesId.length()<=0){
+//                    item.dealerProductRangesId = UUIDUtils.random().toString();
+//                }
+//            }
+//        }
+      Long r =  dealerProductRangesService.updateEntityList(param);
+    if(r<=0){
+        return ResultModel.failure(ResultCode.DEALER_PRODUCT_RANGES_SAVE_ERROR);
+    }
     return ResultModel.Success();
     }
 
@@ -202,28 +201,27 @@ public class DealerController {
      * @param param
      * @return
      */
-    @PostMapping(value = "saveDealerServiceRanges", produces = "application/json;charset=UTF-8")
-    public ResultModel<Boolean> saveDealerServiceRanges(@RequestBody SaveDealerServiceRangeListRequestModel param) throws Exception{
-        if(param.dealerServiceRanges!=null && param.dealerServiceRanges.size()>0){
-            for (SaveDealerServiceRangesRequestModel item:param.dealerServiceRanges
+    @PostMapping("saveDealerServiceRanges")
+    public ResultModel<Boolean> saveDealerServiceRanges(SaveDealerServiceRangeListRequestModel param) throws Exception{
+        if(param.dealerServiceRangeList!=null && param.dealerServiceRangeList.size()>0){
+            for (SaveDealerServiceRangesRequestModel item:param.dealerServiceRangeList
             ) {
                 if(item.dealerServiceRangesId==null||item.dealerServiceRangesId.length()<=0){
                     item.dealerServiceRangesId = UUIDUtils.random().toString();
                 }
             }
         }
-        try{
-            dealerServiceRangesService.updateEntityList(param);
-        }catch(Exception ex){
+        Long r =  dealerServiceRangesService.updateEntityList(param);
+        if(r<=0){
             return ResultModel.failure(ResultCode.DEALER_SERVICE_RANGES_SAVE_ERROR);
         }
         return ResultModel.Success();
     }
 
-    @PostMapping("saveDealerContacts")
-    public ResultModel<Boolean> saveDealerContacts(@RequestBody SaveDealerContactListRequestModel param) throws Exception{
-        if(param.dealerContacts!=null && param.dealerContacts.size()>0){
-            for (SaveDealerContactRequestModel item:param.dealerContacts
+    @PostMapping("saveDealerContact")
+    public ResultModel<Boolean> saveDealerContact(SaveDealerContactListRequestModel param) throws Exception{
+        if(param.dealerContactList!=null && param.dealerContactList.size()>0){
+            for (SaveDealerContactRequestModel item:param.dealerContactList
             ) {
                 if(item.dealerContactId==null||item.dealerContactId.length()<=0){
                     item.dealerContactId = UUIDUtils.random().toString();

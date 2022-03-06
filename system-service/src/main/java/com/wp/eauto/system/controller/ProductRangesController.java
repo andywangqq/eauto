@@ -20,12 +20,7 @@ public class ProductRangesController {
     @Autowired
     public ProductRangesService productRangesService;
 
-    /**
-     * 查询所有产品范围（跨经销店）
-     * @return
-     * @throws Exception
-     */
-    @PostMapping("/getProductRanges")
+    @PostMapping("getProductRanges")
     public ResultModel<List<ProductRangesResponseModel>> getProductRanges() throws Exception {
         List<ProductRangesResponseModel> result = new ArrayList<>();
         List<ProductRanges> productRangesList = productRangesService.findEntityList(new ProductRanges());

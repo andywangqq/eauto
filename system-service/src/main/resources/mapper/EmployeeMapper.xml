@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.wp.eauto.system.mapper.EmployeeMapper">
-    <!--    查询用户账户-->
+<!--    查询用户账户-->
     <select id="getUserAccount" resultType="com.wp.eauto.system.viewmodel.model.LoginUserAccountModel"
             parameterType="String">
         select employee_id as employeeId,
@@ -14,7 +14,7 @@
         and user_name = #{userName}
         limit 1
     </select>
-    <!--    查询当前登录人员信息-->
+<!--    查询当前登录人员信息-->
     <select id="getEmployeeById" resultType="com.wp.eauto.system.viewmodel.model.LoginEmployeeModel"
             parameterType="String">
         select e.employee_name as employeeName,
@@ -26,7 +26,7 @@
         limit 1
     </select>
 
-    <!--    查询当前登录人员角色-->
+<!--    查询当前登录人员角色-->
 
     <select id="getEmployeeRoles" resultType="com.wp.eauto.system.viewmodel.model.LoginEmployeeRoleModel"
             parameterType="String">
@@ -35,50 +35,5 @@
         inner join role r on er.role_id = r.role_id
         where r.is_deleted = 0
         and er.employee_id = #{employeeId}
-    </select>
-
-
-    <!--    查询人员列表-->
-    <resultMap id="employeeMap" type="com.wp.eauto.system.viewmodel.response.employee.EmployeeListResponseModel">
-        <result column="employee_id" property="employeeId"></result>
-        <result column="employee_name" property="employeeName"></result>
-        <result column="gender_name" property="genderName"></result>
-        <result column="user_name" property="userName"></result>
-        <result column="account_status_name" property="accountStatusName"></result>
-        <result column="role_name" property="roleName"></result>
-        <result column="phone" property="phone"></result>
-        <result column="hiredate" property="hiredate"></result>
-        <result column="employee_status_name" property="employeeStatusName"></result>
-    </resultMap>
-
-    <select id="queryEmployeeList"
-            resultType="com.wp.eauto.system.viewmodel.response.employee.EmployeeListResponseModel"
-            parameterType="com.wp.eauto.system.viewmodel.request.employee.EmployeeListRequestModel">
-        select e.employee_id,employee_name, em.mate_name as employee_status_name,gm.mate_name as gender_name,am.mate_name as account_status_name,r.role_name,e.phone,e.hiredate,d.department_name
-        from employee e
-        inner join employee_role er on e.employee_id = er.employee_id
-        inner join role r on er.role_id = r.role_id
-        left join user_account a on e.employee_id = a.employee_id and a.is_deleted = 0
-        left join mate_common em on e.employee_status = em.mate_value and em.mate_code = 'EMPLOYEE_STATUS'
-        left join mate_common gm on e.gender = gm.mate_value and gm.mate_code='GENDER'
-        left join mate_common am on a.account_status = am.mate_value and am.mate_code='ACCOUNT_STATUS'
-        left join departments d on e.department_id = d.departments_id
-        where e.dealer_id = #{dealerId}
-        <if test="employeeName != null and employeeName != ''">
-            and locate(#{employeeName}, e.employee_name)>0
-        </if>
-
-        <if test="departmentId != null and departmentId != ''">
-        and e.department_id = #{departmentId}
-        </if>
-        <if test="roleId != null and roleId != ''">
-            and r.role_id = #{roleId}
-        </if>
-        <if test="employeeStatus != null and employeeStatus != ''">
-            and e.employee_status = #{employeeStatus}
-        </if>
-        <if test="gender != null and gender != ''">
-            and e.gender = #{gender}
-        </if>
     </select>
 </mapper>

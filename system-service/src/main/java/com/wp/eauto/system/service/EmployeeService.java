@@ -1,12 +1,9 @@
 package com.wp.eauto.system.service;
 
-import com.github.pagehelper.PageInfo;
 import com.wp.eauto.system.domain.Employee;
 import com.wp.eauto.system.viewmodel.model.LoginEmployeeModel;
 import com.wp.eauto.system.viewmodel.model.LoginEmployeeRoleModel;
 import com.wp.eauto.system.viewmodel.model.LoginUserAccountModel;
-import com.wp.eauto.system.viewmodel.request.employee.EmployeeListRequestModel;
-import com.wp.eauto.system.viewmodel.response.employee.EmployeeListResponseModel;
 
 import javax.websocket.server.PathParam;
 import java.util.List;
@@ -48,12 +45,4 @@ public interface EmployeeService {
 
     //查询实体List
     List<Employee> findEntityList(Employee param) throws Exception;
-
-    /**
-     * 查询人员列表
-     * @param param
-     * @return
-     * @throws Exception
-     */
-    PageInfo<List<EmployeeListResponseModel>> queryEmployeeList(EmployeeListRequestModel param) throws Exception;
 }
