@@ -15,14 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/eauto/ProductRanges")
+@RequestMapping("/ProductRanges")
 public class ProductRangesController {
     @Autowired
     public ProductRangesService productRangesService;
 
     @PostMapping("getProductRanges")
     public ResultModel<List<ProductRangesResponseModel>> getProductRanges() throws Exception {
-        List<ProductRangesResponseModel> result = new ArrayList<>();
+        List<ProductRangesResponseModel> result = new ArrayList();
         List<ProductRanges> productRangesList = productRangesService.findEntityList(new ProductRanges());
         if(productRangesList!=null && productRangesList.size()>0){
             for (ProductRanges pro:productRangesList

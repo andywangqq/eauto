@@ -7,6 +7,7 @@ import com.wp.eauto.system.viewmodel.request.action.ActionRequestModel;
 import com.wp.eauto.system.viewmodel.response.action.ActionResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,7 @@ import java.util.List;
  * Description: No Description
  */
 @RestController
-@RequestMapping("/eauto/action")
+@RequestMapping("/action")
 public class ActionController {
     @Autowired
     private ActionRangesService actionRangesService;
@@ -31,7 +32,7 @@ public class ActionController {
      * @return
      */
     @PostMapping("getActionList")
-    public ResultModel<List<ActionResponseModel>> getActionList(ActionRequestModel param) {
+    public ResultModel<List<ActionResponseModel>> getActionList(@RequestBody ActionRequestModel param) {
         if (param.dealerId == null || param.dealerId.length() <= 0) {
             return ResultModel.failure(ResultCode.PARAM_DEALERID_IS_BLANK);
         }

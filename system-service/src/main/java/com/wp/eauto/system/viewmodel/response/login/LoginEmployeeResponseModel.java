@@ -19,6 +19,8 @@ public class LoginEmployeeResponseModel {
      */
     public String employeeName;
 
+    public String employeeId;
+
     /**
      * 所在经销店
      */
@@ -28,5 +30,14 @@ public class LoginEmployeeResponseModel {
      * 角色名称
      */
     public List<LoginEmployeeRoleModel> roleNames;
-}
 
+    /**
+     * 请求跟踪id
+     */
+    public String traceId;
+
+    /**
+     *
+     */
+    public String token;
+}

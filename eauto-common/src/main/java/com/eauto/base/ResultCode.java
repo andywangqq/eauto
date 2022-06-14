@@ -74,7 +74,15 @@ public enum ResultCode {
  /**
   * 用户已存在
   */
- USER_HAS_EXISTED(2005,"用户已存在");
+ USER_HAS_EXISTED(2005,"用户已存在"),
+ /**
+  * token过期
+  */
+ USER_TOKEN_EXPIRED(2006,"令牌已过期"),
+ /**
+  * token错误
+  */
+ USER_TOKEN_ERROR(2007,"令牌错误");
 
 
 

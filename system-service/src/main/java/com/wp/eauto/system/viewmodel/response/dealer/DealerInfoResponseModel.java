@@ -8,9 +8,9 @@ import java.util.List;
 
 public class DealerInfoResponseModel {
     public DealerInfoResponseModel(){
-        this.serviceRanges = new ArrayList<>();
-        this.productRanges = new ArrayList<>();
-        this.contacts = new ArrayList<>();
+        this.serviceRanges = new ArrayList();
+        this.productRanges = new ArrayList();
+        this.contacts = new ArrayList();
     }
     /**
      * 经销店Id

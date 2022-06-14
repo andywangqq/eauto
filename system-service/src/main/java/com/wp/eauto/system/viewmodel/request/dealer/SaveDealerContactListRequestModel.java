@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class SaveDealerContactListRequestModel {
     public SaveDealerContactListRequestModel() {
-        this.dealerContactList = new ArrayList<>();
+        this.dealerContactList = new ArrayList();
     }
 
     /**

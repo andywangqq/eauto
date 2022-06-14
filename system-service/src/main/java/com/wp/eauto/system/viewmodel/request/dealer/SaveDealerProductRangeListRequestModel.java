@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 public class SaveDealerProductRangeListRequestModel {
     public SaveDealerProductRangeListRequestModel(){
-        this.dealerProductRangeList = new ArrayList<>();
+        this.dealerProductRangeList = new ArrayList();
     }
     /**
      * 门店Id
