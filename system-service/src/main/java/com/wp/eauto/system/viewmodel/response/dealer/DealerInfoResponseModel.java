@@ -1,6 +1,8 @@
 package com.wp.eauto.system.viewmodel.response.dealer;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wp.eauto.system.viewmodel.request.dealer.DealerInfoRequestModel;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,6 +45,7 @@ public class DealerInfoResponseModel {
     /**
      * 注册时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     public Date registrationTime;
     /**
      * 所在地车牌

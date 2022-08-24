@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ProductRanges")
+@RequestMapping(value = "/ProductRanges", produces = "application/json;charset=UTF-8")
 public class ProductRangesController {
     @Autowired
     public ProductRangesService productRangesService;

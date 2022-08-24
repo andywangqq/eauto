@@ -13,11 +13,14 @@ import com.wp.eauto.system.viewmodel.response.dealer.DealerContactResponseModel;
 import com.wp.eauto.system.viewmodel.response.dealer.DealerInfoResponseModel;
 import com.wp.eauto.system.viewmodel.response.dealer.DealerProductRangesResponseModel;
 import com.wp.eauto.system.viewmodel.response.dealer.DealerServiceRangesResponseModel;
+import org.apache.ibatis.transaction.jdbc.JdbcTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.data.annotation.Transient;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.Produces;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +32,7 @@ import java.util.List;
  * Description: No Description
  */
 @RestController
-@RequestMapping("/eauto/dealer")
+@RequestMapping(value = "/dealer", produces = "application/json;charset=UTF-8")
 public class DealerController {
     @Autowired
     private DealerService dealerService;
@@ -50,7 +53,7 @@ public class DealerController {
      * @return
      */
     @PostMapping("getDealerInfo")
-    public ResultModel<DealerInfoResponseModel> getDealerInfo(DealerInfoRequestModel param) throws Exception {
+    public ResultModel<DealerInfoResponseModel> getDealerInfo(@RequestBody DealerInfoRequestModel param) throws Exception {
         if (param.dealerId == null || param.dealerId.length() <= 0) {
             return ResultModel.failure(ResultCode.PARAM_DEALERID_IS_BLANK);
         }
@@ -162,15 +165,11 @@ public class DealerController {
         dealer.setTelephone(param.telephone);
         dealer.setAuthentication(param.authentication);
         dealer.setRemark(param.remark);
+
         Long dr = dealerService.updateEntity(dealer);
         if (dr <= 0) {
             return ResultModel.failure(ResultCode.DEALER_SAVE_ERROR);
         }
-
-        //保存经销店主营服务
-
-        //保存经销店联系人
-
         return ResultModel.Success();
     }
 
@@ -180,15 +179,16 @@ public class DealerController {
      * @return
      */
     @PostMapping(value = "saveDealerProductRanges", produces = "application/json;charset=UTF-8")
+    @Transient
     public ResultModel<Boolean> saveDealerProductRanges(@RequestBody SaveDealerProductRangeListRequestModel param) throws Exception{
-//        if(param.dealerProductRangeList!=null && param.dealerProductRangeList.size()>0){
-//            for (SaveDealerProductRangesRequestModel item:param.dealerProductRangeList
-//                 ) {
-//                if(item.dealerProductRangesId==null||item.dealerProductRangesId.length()<=0){
-//                    item.dealerProductRangesId = UUIDUtils.random().toString();
-//                }
-//            }
-//        }
+        if(param.dealerProductRangeList!=null && param.dealerProductRangeList.size()>0){
+            for (SaveDealerProductRangesRequestModel item:param.dealerProductRangeList
+                 ) {
+                if(item.dealerProductRangesId==null||item.dealerProductRangesId.length()<=0){
+                    item.dealerProductRangesId = UUIDUtils.random().toString();
+                }
+            }
+        }
       Long r =  dealerProductRangesService.updateEntityList(param);
     if(r<=0){
         return ResultModel.failure(ResultCode.DEALER_PRODUCT_RANGES_SAVE_ERROR);
@@ -202,6 +202,7 @@ public class DealerController {
      * @return
      */
     @PostMapping("saveDealerServiceRanges")
+    @Transient
     public ResultModel<Boolean> saveDealerServiceRanges(SaveDealerServiceRangeListRequestModel param) throws Exception{
         if(param.dealerServiceRangeList!=null && param.dealerServiceRangeList.size()>0){
             for (SaveDealerServiceRangesRequestModel item:param.dealerServiceRangeList
@@ -219,6 +220,7 @@ public class DealerController {
     }
 
     @PostMapping("saveDealerContact")
+    @Transient
     public ResultModel<Boolean> saveDealerContact(SaveDealerContactListRequestModel param) throws Exception{
         if(param.dealerContactList!=null && param.dealerContactList.size()>0){
             for (SaveDealerContactRequestModel item:param.dealerContactList

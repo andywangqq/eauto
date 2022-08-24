@@ -2,15 +2,15 @@ package com.wp.eauto.system.controller;
 
 import com.eauto.base.ResultCode;
 import com.eauto.base.ResultModel;
+import com.eauto.utils.JsonUtil;
+import com.wp.eauto.utils.RedisUtils;
+import com.eauto.utils.TokenUtils;
 import com.wp.eauto.system.service.EmployeeService;
 import com.wp.eauto.system.viewmodel.model.LoginEmployeeModel;
 import com.wp.eauto.system.viewmodel.model.LoginEmployeeRoleModel;
 import com.wp.eauto.system.viewmodel.model.LoginUserAccountModel;
 import com.wp.eauto.system.viewmodel.request.login.LoginEmployeeRequestModel;
 import com.wp.eauto.system.viewmodel.response.login.LoginEmployeeResponseModel;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,14 +19,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping(value = "/employee", produces = "application/json;charset=UTF-8")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private RedisUtils redisUtils;
 
     /**
      * 登录
@@ -35,7 +36,7 @@ public class EmployeeController {
      * @return
      */
     @PostMapping("login")
-    public ResultModel<LoginEmployeeResponseModel> login(@RequestBody LoginEmployeeRequestModel param) {
+    public ResultModel<LoginEmployeeResponseModel> login(@RequestBody LoginEmployeeRequestModel param) throws Exception {
         if (param.userName == null
                 || param.userName.length() <= 0
                 || param.password == null
@@ -65,18 +66,39 @@ public class EmployeeController {
         result.employeeId = user.getEmployeeId();
         result.dealerName = employee.dealerName;
         result.employeeName = employee.employeeName;
-        JwtBuilder builder = Jwts.builder();
-        result.token = builder.setSubject("userName")
-                .setIssuedAt(new Date()) //设置token生成时间
-                .setId(result.employeeId)//设置tokenID
-                .setExpiration(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000))//设置过期时间,现在为设置 一天
-                .signWith(SignatureAlgorithm.HS256, "123456")//设置token密码，解析token需要使用
-                .compact();
-        //查询角色
+        result.token = TokenUtils.token(user.employeeId);
+       //查询角色
         List<LoginEmployeeRoleModel> employeeRoles = employeeService.getEmployeeRoles(user.employeeId);
         result.roleNames = employeeRoles;
 
+        redisUtils.set(result.token, JsonUtil.writeEntity2JSON(result));
+
         return ResultModel.Success(result);
     }
+
+    /**
+     * todo 新增员工
+     */
+
+    /**
+     * todo 更新员工
+     */
+
+    /**
+     * todo 查询员工列表
+     */
+
+    /**
+     * todo 分配账户
+     */
+
+    /**
+     * todo 重置密码
+     */
+
+    /**
+     * todo 删除
+     */
+
 
 }

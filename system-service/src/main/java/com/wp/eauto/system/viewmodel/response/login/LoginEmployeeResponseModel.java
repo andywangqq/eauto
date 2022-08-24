@@ -4,6 +4,7 @@ package com.wp.eauto.system.viewmodel.response.login;
 import com.wp.eauto.system.viewmodel.model.LoginEmployeeRoleModel;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -13,12 +14,15 @@ import java.util.List;
  * Description: No Description
  */
 @Data
-public class LoginEmployeeResponseModel {
+public class LoginEmployeeResponseModel implements Serializable {
     /**
      * 人员名称
      */
     public String employeeName;
 
+    /**
+     * 人员id
+     */
     public String employeeId;
 
     /**

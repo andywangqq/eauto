@@ -4,6 +4,7 @@ import com.wp.eauto.system.domain.Dealer;
 import com.wp.eauto.system.mapper.DealerMapper;
 import com.wp.eauto.system.service.DealerService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
 @Service("dealerService")
 public class DealerServiceImpl implements DealerService {
 
+	private static SqlSessionFactory sqlSessionFactory;
 	@Autowired
 	private DealerMapper dealerMapper;
 
@@ -49,6 +51,8 @@ public class DealerServiceImpl implements DealerService {
 
 	@Override
 	public long updateEntity(Dealer param) throws Exception {
+
+
 		try {
 			log.info("updateEntity");
 			return dealerMapper.updateEntity(param);

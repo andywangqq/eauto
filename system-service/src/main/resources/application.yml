@@ -24,8 +24,15 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   freemarker:
     prefer-file-system-access: false
+  redis:                #redis
+    host: 127.0.0.1
+    port: 6379
+    password:
+#    database: 0
+#    timeout: 0
 jdbc:
   driverClass: com.mysql.jdbc.Driver
   url: jdbc:mysql://localhost:3306/eauto
   username: root
   password: root
+

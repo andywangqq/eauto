@@ -48,7 +48,7 @@ public class LogInterceptor implements HandlerInterceptor {
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS");
         response.setHeader("Access-Control-Allow-Headers", "*");
-
+        response.setHeader("Content-Type", "application/json;charset=UTF-8");
         long beginTime = System.currentTimeMillis(); //开始时间
         startTimeThreadLocal.set(beginTime); //线程绑定变量(该数据只有当前请求的线程可见)
         log.info("开始计时: {}", new SimpleDateFormat("hh:mm:ss.SSS").format(beginTime));
@@ -61,10 +61,11 @@ public class LogInterceptor implements HandlerInterceptor {
             doResponse(response, result);
         } else {
             try {
-                //在jwt中，只要token不合法或者验证不通过就会抛出异常
-                JwtParser parser = Jwts.parser();
-                parser.setSigningKey("123456");
-                Jws<Claims> claimsJws = parser.parseClaimsJws(token);
+               if( !TokenUtils.verify(token)){
+                   ResultModel result = ResultModel.failure(ResultCode.USER_TOKEN_EXPIRED);
+                   doResponse(response, result);
+               }
+               request.setAttribute("key",token);
                 return true;
             } catch (ExpiredJwtException e1) {
                 ResultModel result = ResultModel.failure(ResultCode.USER_TOKEN_EXPIRED);

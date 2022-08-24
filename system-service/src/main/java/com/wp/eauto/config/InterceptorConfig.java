@@ -4,10 +4,10 @@ import com.eauto.inteceptor.LogInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 @Configuration
-public class InterceptorConfig implements WebMvcConfigurer {
+public class InterceptorConfig extends  WebMvcConfigurationSupport {
 
     /*
      * 将跨域拦截器交给spring容器托管
@@ -25,5 +25,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
         registry.addInterceptor(logInterceptor())
                 .addPathPatterns("/**")//拦截所有的路径
                 .excludePathPatterns("/employee/login");
+
+        // 添加注册器
+        super.addInterceptors(registry);
     }
 }

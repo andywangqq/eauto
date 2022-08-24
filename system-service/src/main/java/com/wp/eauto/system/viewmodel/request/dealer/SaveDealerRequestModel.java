@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * User:Administrator
@@ -63,5 +64,14 @@ public class SaveDealerRequestModel {
      */
     public String remark;
 
+    /**
+     * 主营产品范围
+     */
+    public List<String> dealerProductRanges;
+
+    /**
+     * 主营服务范围
+     */
+    public List<String> dealerServiceRanges;
 
 }
