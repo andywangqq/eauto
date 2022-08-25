@@ -131,7 +131,7 @@ public class DealerController {
      * @return
      */
     @PostMapping("saveDealer")
-    public ResultModel<Boolean> saveDealer(SaveDealerRequestModel param) throws Exception {
+    public ResultModel<Boolean> saveDealer(@RequestBody SaveDealerRequestModel param) throws Exception {
 
         //保存经销店
         if (param.dealerId == null || param.dealerId.length() <= 0) {
@@ -189,7 +189,7 @@ public class DealerController {
                 }
             }
         }
-      Long r =  dealerProductRangesService.updateEntityList(param);
+      Long r =  dealerProductRangesService.updateEntityList(param.dealerId, param.dealerProductRangeList);
     if(r<=0){
         return ResultModel.failure(ResultCode.DEALER_PRODUCT_RANGES_SAVE_ERROR);
     }

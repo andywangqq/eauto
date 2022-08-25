@@ -35,15 +35,13 @@
 		where dealer_id = #{dealerId}
 	</select>
 
-    <insert id="updateEntityList"
-            parameterType="com.wp.eauto.system.viewmodel.request.dealer.SaveDealerProductRangeListRequestModel">
-        delete from dealer_product_ranges where dealer_id = #{dealerId};
-        <if test="dealerProductRangeList != null and dealerProductRangeList.size() > 0">
-            insert into dealer_product_ranges (dealer_product_ranges_id,product_ranges_id,dealer_id,product_name) values
-            <foreach collection="dealerProductRangeList" item="item" index="index" separator=",">
-                (#{item.dealerProductRangesId},#{item.productRangesId},#{dealerId},#{item.productName})
-            </foreach>;
+    <insert id="updateEntityList">
+		delete from dealer_product_ranges where dealer_id = #{dealerId};
+        <if test="productList != null and productList.size() > 0">
+			insert into dealer_product_ranges (dealer_product_ranges_id,product_ranges_id,dealer_id,product_name) values
+			<foreach collection="productList" item="product" separator=",">
+			(#{product.dealerProductRangesId},#{product.productRangesId},#{dealerId},#{product.productName})
+			</foreach>;
         </if>
     </insert>
-
 </mapper>

@@ -4,6 +4,7 @@ import com.wp.eauto.system.domain.DealerProductRanges;
 import com.wp.eauto.system.mapper.DealerProductRangesMapper;
 import com.wp.eauto.system.service.DealerProductRangesService;
 import com.wp.eauto.system.viewmodel.request.dealer.SaveDealerProductRangeListRequestModel;
+import com.wp.eauto.system.viewmodel.request.dealer.SaveDealerProductRangesRequestModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,10 +88,10 @@ public class DealerProductRangesServiceImpl implements DealerProductRangesServic
 
 	//更新门店主营产品实体集合
 	@Override
-	public long updateEntityList(SaveDealerProductRangeListRequestModel param) throws Exception{
+	public long updateEntityList(String dealerId, List<SaveDealerProductRangesRequestModel> productList) throws Exception{
 		try {
 			log.info("updateEntityList");
-			return dealerProductRangesMapper.updateEntityList(param);
+			return dealerProductRangesMapper.updateEntityList(dealerId,productList);
 		} catch(Exception e) {
 			log.info("updateEntityList");
 			e.printStackTrace();

@@ -18,7 +18,7 @@ spring:
   application:
     name: system-service #项目名
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/eauto?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://127.0.0.1:3306/eauto?allowMultiQueries=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -32,7 +32,7 @@ spring:
 #    timeout: 0
 jdbc:
   driverClass: com.mysql.jdbc.Driver
-  url: jdbc:mysql://localhost:3306/eauto
+  url: jdbc:mysql://localhost:3306/eauto?allowMultiQueries=true
   username: root
   password: root
 

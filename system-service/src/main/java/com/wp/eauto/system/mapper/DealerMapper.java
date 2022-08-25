@@ -2,6 +2,8 @@ package com.wp.eauto.system.mapper;
 
 import com.eauto.mapper.BaseMapper;
 import com.wp.eauto.system.domain.Dealer;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
