@@ -3,6 +3,7 @@ package com.wp.eauto.system.mapper;
 import com.eauto.mapper.BaseMapper;
 import com.wp.eauto.system.domain.DealerServiceRanges;
 import com.wp.eauto.system.viewmodel.request.dealer.SaveDealerServiceRangeListRequestModel;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -26,6 +27,6 @@ public interface DealerServiceRangesMapper extends BaseMapper<DealerServiceRange
     List<DealerServiceRanges> findEntityList(DealerServiceRanges param);
 
     //	更新门店主营服务
-    long updateEntityList(SaveDealerServiceRangeListRequestModel param);
+    long updateEntityList(@Param("param") SaveDealerServiceRangeListRequestModel param);
 
 }

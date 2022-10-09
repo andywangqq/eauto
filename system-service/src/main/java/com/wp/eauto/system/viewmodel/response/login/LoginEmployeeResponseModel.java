@@ -31,6 +31,11 @@ public class LoginEmployeeResponseModel implements Serializable {
     public String dealerName;
 
     /**
+     * 经销商id
+     */
+    public String dealerId;
+
+    /**
      * 角色名称
      */
     public List<LoginEmployeeRoleModel> roleNames;

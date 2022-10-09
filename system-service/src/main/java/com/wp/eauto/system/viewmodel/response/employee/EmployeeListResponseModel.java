@@ -2,7 +2,7 @@ package com.wp.eauto.system.viewmodel.response.employee;
 
 import lombok.Data;
 
-import java.time.DateTimeException;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,7 +12,7 @@ import java.util.Date;
  * Description: No Description
  */
 @Data
-public class EmployeeListResponseModel {
+public class EmployeeListResponseModel implements Serializable {
     /**
      * 人员Id
      */
@@ -35,7 +35,7 @@ public class EmployeeListResponseModel {
     public String accountStatusName;
 
     /**
-     * 职位
+     * 角色/职位
      */
     public String roleName;
 
@@ -47,7 +47,7 @@ public class EmployeeListResponseModel {
     /**
      * 入职日期
      */
-    public Date hiredate;
+    public Date hireDate;
 
     /**
      * 在职状态

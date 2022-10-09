@@ -203,7 +203,7 @@ public class DealerController {
      */
     @PostMapping("saveDealerServiceRanges")
     @Transient
-    public ResultModel<Boolean> saveDealerServiceRanges(SaveDealerServiceRangeListRequestModel param) throws Exception{
+    public ResultModel<Boolean> saveDealerServiceRanges(@RequestBody SaveDealerServiceRangeListRequestModel param) throws Exception{
         if(param.dealerServiceRangeList!=null && param.dealerServiceRangeList.size()>0){
             for (SaveDealerServiceRangesRequestModel item:param.dealerServiceRangeList
             ) {
@@ -221,8 +221,11 @@ public class DealerController {
 
     @PostMapping("saveDealerContact")
     @Transient
-    public ResultModel<Boolean> saveDealerContact(SaveDealerContactListRequestModel param) throws Exception{
+    public ResultModel<Boolean> saveDealerContact(@RequestBody SaveDealerContactListRequestModel param) throws Exception{
         if(param.dealerContactList!=null && param.dealerContactList.size()>0){
+            if(param.dealerContactList.size()>3){
+                return ResultModel.failure(ResultCode.DEALER_CONTACT_PARAM_NUMBER_ERROR);
+            }
             for (SaveDealerContactRequestModel item:param.dealerContactList
             ) {
                 if(item.dealerContactId==null||item.dealerContactId.length()<=0){

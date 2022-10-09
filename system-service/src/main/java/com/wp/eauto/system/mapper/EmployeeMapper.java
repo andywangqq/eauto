@@ -5,6 +5,8 @@ import com.wp.eauto.system.domain.Employee;
 import com.wp.eauto.system.viewmodel.model.LoginEmployeeModel;
 import com.wp.eauto.system.viewmodel.model.LoginEmployeeRoleModel;
 import com.wp.eauto.system.viewmodel.model.LoginUserAccountModel;
+import com.wp.eauto.system.viewmodel.request.employee.EmployeeListRequestModel;
+import com.wp.eauto.system.viewmodel.response.employee.EmployeeListResponseModel;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -41,8 +43,8 @@ public interface EmployeeMapper extends BaseMapper<Employee> {
 
     long updateEntity(Employee param);
 
-    Employee findEntity(Employee param);
+    Employee findEntity(@Param("employeeId") String employeeId);
 
-    List<Employee> findEntityList(Employee param);
+    List<EmployeeListResponseModel> GetEmployeeList(@Param("param") EmployeeListRequestModel param);
 
 }

@@ -13,7 +13,7 @@ import java.io.Serializable;
  * Description: No Description
  */
 @Data
-public class EmployeeListRequestModel extends BasePageRequestModel implements Serializable {
+public class EmployeeListRequestModel extends BasePageRequestModel {
 
     /**
      * 门店Id

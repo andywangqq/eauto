@@ -1,11 +1,17 @@
 package com.wp.eauto.system.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wp.eauto.system.domain.Employee;
 import com.wp.eauto.system.viewmodel.model.LoginEmployeeModel;
 import com.wp.eauto.system.viewmodel.model.LoginEmployeeRoleModel;
 import com.wp.eauto.system.viewmodel.model.LoginUserAccountModel;
 import com.wp.eauto.system.mapper.EmployeeMapper;
 import com.wp.eauto.system.service.EmployeeService;
+import com.wp.eauto.system.viewmodel.request.employee.EmployeeListRequestModel;
+import com.wp.eauto.system.viewmodel.response.employee.EmployeeListResponseModel;
+import com.wp.eauto.system.viewmodel.response.login.LoginEmployeeResponseModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +21,6 @@ import java.util.List;
 @Slf4j
 @Service("employeeService")
 public class EmployeeServiceImpl implements EmployeeService {
-
 
     @Autowired
     private EmployeeMapper employeeMapper;
@@ -88,21 +93,24 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
     @Override
-    public Employee findEntity(Employee param) throws Exception {
+    public Employee findEntity(String employeeId) throws Exception {
         try {
             log.info("findEntity");
-            return employeeMapper.findEntity(param);
+            return employeeMapper.findEntity(employeeId);
         } catch(Exception e) {
             log.info("findEntity异常");
             e.printStackTrace();
             throw e;
         }
     }
+
     @Override
-    public List<Employee> findEntityList(Employee param) throws Exception {
+    public PageInfo<EmployeeListResponseModel> GetEmployeeList(EmployeeListRequestModel param) throws Exception
+    {
         try {
-            log.info("findEntityList");
-            return employeeMapper.findEntityList(param);
+            log.info("findEntityList："+ JSON.toJSONString(param));
+            return PageHelper.startPage(param.getPageIndex(), param.getPageSize()).doSelectPageInfo(() ->
+                    employeeMapper.GetEmployeeList(param));
         } catch(Exception e) {
             log.info("findEntityList异常");
             e.printStackTrace();

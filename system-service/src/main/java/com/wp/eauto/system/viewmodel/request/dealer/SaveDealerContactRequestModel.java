@@ -13,7 +13,6 @@ public class SaveDealerContactRequestModel {
     /**
      * 门店Id
      */
-    public String dealerId;
     public String dealerContactId;
     public String contactName;
     public String phone;

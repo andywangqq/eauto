@@ -11,4 +11,9 @@ public class LoginEmployeeModel {
      */
     public String dealerName;
 
+    /**
+     * 人员归属经销店id
+     */
+    public String dealerId;
+
 }

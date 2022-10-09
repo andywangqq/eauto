@@ -37,17 +37,16 @@
 	<insert id="updateEntityList"
 			parameterType="com.wp.eauto.system.viewmodel.request.dealer.SaveDealerServiceRangeListRequestModel">
 		-- 删除已经移除的门店主营服务
-		delete from dealer_service_ranges
-		where dealer_id = #{dealerId};
-		<if test="dealerServiceRangeList!=null and dealerServiceRangeList.length>0">
+		delete from dealer_service_ranges where dealer_id = #{param.dealerId};
+		<if test="param.dealerServiceRangeList!=null and param.dealerServiceRangeList.size()>0">
 			-- 新增门店主营服务
 			insert into dealer_service_ranges(dealer_service_ranges_id,service_ranges_id,dealer_id,service_name)
 			values
-			<foreach collection="dealerServiceRangeList" item="item" index="index" separator=",">
+			<foreach collection="param.dealerServiceRangeList" item="item" index="index" separator=",">
 				(
 				#{item.dealerServiceRangesId},
 				#{item.serviceRangesId},
-				#{dealerId},
+				#{param.dealerId},
 				#{item.serviceName}
 				)
 			</foreach>

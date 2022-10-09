@@ -41,16 +41,16 @@
 			parameterType="com.wp.eauto.system.viewmodel.request.dealer.SaveDealerContactListRequestModel">
 		-- 删除已经移除的门店联系人
 		delete from dealer_contact
-		where dealer_id = #{dealerId};
-		<if test="dealerContactList!=null and dealerContactList.length>0">
+		where dealer_id = #{param.dealerId};
+		<if test="param.dealerContactList!=null and param.dealerContactList.size()>0">
 			-- 新增门店联系人
 			insert into dealer_contact(dealer_contact_id,dealer_id,contact_name,phone,email,qq)
 			values
-			<foreach collection="dealerContactList" item="item" index="index" separator=",">
+			<foreach collection="param.dealerContactList" item="item" index="index" separator=",">
 				(
 				#{item.dealerContactId},
-				#{dealerId},
-				#{item.contact_name},
+				#{param.dealerId},
+				#{item.contactName},
 				#{item.phone},
 				#{item.email},
 				#{item.qq}

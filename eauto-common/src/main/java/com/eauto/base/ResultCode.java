@@ -11,6 +11,12 @@ public enum ResultCode {
  /* 成功状态码 */
  SUCCESS(1,"成功"),
 
+ /* 失败 */
+ FAIL(2,"失败"),
+
+ /* 数据不存在 */
+ NOT_EXIST(3,"数据不存在"),
+
  /*参数错误: 1001-1999*/
  PARAM_IS_INVALID(1001,"参数无效"),
  /**
@@ -52,7 +58,11 @@ public enum ResultCode {
  /**
   * 门店联系人保存错误
   */
- DEALER_CONTACT_SAVE_ERROR(1010,"门店联系人保存错误"),
+ DEALER_CONTACT_SAVE_ERROR(1011,"门店联系人保存错误"),
+ /**
+  * 门店联系人保存错误
+  */
+ DEALER_CONTACT_PARAM_NUMBER_ERROR(101101,"门店联系人参数数量错误"),
 
  /*系统模块错误：2001-2999*/
  /**

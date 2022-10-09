@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.wp.eauto.system.mapper.EmployeeMapper">
-<!--    查询用户账户-->
+    <!--    查询用户账户-->
     <select id="getUserAccount" resultType="com.wp.eauto.system.viewmodel.model.LoginUserAccountModel"
             parameterType="String">
         select employee_id as employeeId,
@@ -14,11 +14,12 @@
         and user_name = #{userName}
         limit 1
     </select>
-<!--    查询当前登录人员信息-->
+    <!--    查询当前登录人员信息-->
     <select id="getEmployeeById" resultType="com.wp.eauto.system.viewmodel.model.LoginEmployeeModel"
             parameterType="String">
         select e.employee_name as employeeName,
-        d.a_name as dealerName
+        d.a_name as dealerName,
+        d.dealer_id as dealerId
         from employee e
         inner join dealer d on e.dealer_id = d.dealer_id
         where e.is_deleted = 0 and d.is_deleted = 0
@@ -26,7 +27,7 @@
         limit 1
     </select>
 
-<!--    查询当前登录人员角色-->
+    <!--    查询当前登录人员角色-->
 
     <select id="getEmployeeRoles" resultType="com.wp.eauto.system.viewmodel.model.LoginEmployeeRoleModel"
             parameterType="String">
@@ -36,4 +37,72 @@
         where r.is_deleted = 0
         and er.employee_id = #{employeeId}
     </select>
+
+    <!--列表查询/条件查询-->
+    <select id="GetEmployeeList" resultType="com.wp.eauto.system.viewmodel.response.employee.EmployeeListResponseModel"
+            parameterType="com.wp.eauto.system.viewmodel.request.employee.EmployeeListRequestModel">
+        SELECT e.employee_id,e.employee_name,e.gender,u.user_name,u.account_status,r.role_name,e.phone,e.hire_date,
+        e.employee_status
+        FROM employee e
+        inner join employee_role er on e.employee_id = er.role_id
+        inner join role r on er.role_id = r.role_id
+        inner join user_account u on e.employee_id = u.employee_id
+        where e.is_deleted = 0
+        <if test="param.dealerId != null and param.dealerId.trim() != ''">
+            and e.dealer_id=#{param.dealerId}
+        </if>
+        <if test="param.employeeName != null and param.employeeName.trim() != ''">
+            and e.employee_name LIKE concat('%',#{param.employeeName},'%')
+        </if>
+        <if test="param.departmentId != null and param.departmentId!=''">
+            and e.department_id = #{param.departmentId}
+        </if>
+        <if test="param.roleId != null and param.roleId>0">
+            and er.role_id = #{param.roleId}
+        </if>
+        <if test="param.employeeStatus != null and param.employeeStatus>0">
+            and e.employee_status = #{param.employeeStatus}
+        </if>
+        <if test="param.gender != null and param.gender>0">
+            and e.gender = #{param.gender}
+        </if>
+        order by e.create_time desc
+    </select>
+
+<!--    新增-->
+    <insert id="addEntity" parameterType="com.wp.eauto.system.domain.Employee">
+		insert into employee(employeeId,employeeName,gender,phone,departmentId,allowance,basePay,qq,idCardNo,email,employeeStatus,hireDate,dealerId,isDeleted,createTime,createUserId,updateTime,updateUserId) values(#{employeeId},#{employeeName},#{gender},#{phone},#{departmentId},#{allowance},#{basePay},#{qq},#{idCardNo},#{email},#{employeeStatus},#{hireDate},#{dealerId},#{isDeleted},#{createTime},#{createUserId},#{updateTime},#{updateUserId})
+	</insert>
+
+<!--    更新-->
+    <update id="updateEntity" parameterType="com.wp.eauto.system.domain.Employee">
+		update employee set employee_name=#{employeeName},gender=#{gender},phone=#{phone},department_id=#{departmentId},allowance=#{allowance},base_pay=#{basePay},qq=#{qq},id_card_no=#{idCardNo},email=#{email},employee_status=#{employeeStatus},hire_date=#{hireDate},dealer_id=#{dealerId},is_deleted=#{isDeleted},create_time=#{createTime},create_user_id=#{createUserId},update_time=#{updateTime},update_user_id=#{updateUserId} where employee_id = #{employeeId}
+	</update>
+
+<!--    查询-->
+    <select id="findEntity" resultType="com.wp.eauto.system.domain.Employee">
+		select
+		employee_id AS employeeId,
+		employee_name AS employeeName,
+		gender AS gender,
+		phone AS phone,
+		department_id AS departmentId,
+		allowance AS allowance,
+		base_pay AS basePay,
+		qq AS qq,
+		id_card_no AS idCardNo,
+		email AS email,
+		employee_status AS employeeStatus,
+		hire_date AS hireDate,
+		dealer_id AS dealerId,
+		is_deleted AS isDeleted,
+		create_time AS createTime,
+		create_user_id AS createUserId,
+		update_time AS updateTime,
+		update_user_id AS updateUserId
+		from employee
+		where employee_id = #{employeeId}
+	</select>
+
+
 </mapper>

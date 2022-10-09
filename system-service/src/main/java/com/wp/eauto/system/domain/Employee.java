@@ -6,11 +6,10 @@ import java.util.Date;
 /**
  * table name:  employee
  * author name: Andy
- * create time: 2021-09-30 15:33:33
- */ 
+ * create time: 2022-10-09 22:33:33
+ */
 
 public class Employee{
-	private Long id;	//
 	private String employeeId;	//
 	private String employeeName;	//雇员名称
 	private Short gender;	//性别
@@ -22,7 +21,7 @@ public class Employee{
 	private String idCardNo;	//身份证
 	private String email;	//邮箱
 	private Short employeeStatus;	//状态
-	private Date hiredate;	//入职日期
+	private Date hireDate;	//入职日期
 	private String dealerId;	//经销商id
 	private Short isDeleted;	//是否已删除
 	private Date createTime;	//创建时间
@@ -30,14 +29,6 @@ public class Employee{
 	private Date updateTime;	//修改时间
 	private String updateUserId;	//修改人
 
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getEmployeeId() {
 		return employeeId;
@@ -127,12 +118,12 @@ public class Employee{
 		this.employeeStatus = employeeStatus;
 	}
 
-	public Date getHiredate() {
-		return hiredate;
+	public Date getHireDate() {
+		return hireDate;
 	}
 
-	public void setHiredate(Date hiredate) {
-		this.hiredate = hiredate;
+	public void setHireDate(Date hireDate) {
+		this.hireDate = hireDate;
 	}
 
 	public String getDealerId() {
